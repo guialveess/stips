@@ -7,8 +7,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "~/components/ui/alert-dialog";
-import { Button } from "~/components/ui/button";
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 interface CancelConfirmModalProps {
   reset: () => void;
@@ -29,7 +29,7 @@ export default function CancelConfirmModal({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-          Tem certeza de que deseja descartar as alterações?
+            Tem certeza de que deseja descartar as alterações?
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>

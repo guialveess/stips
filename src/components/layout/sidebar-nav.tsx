@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { buttonVariants } from "~/components/ui/button";
-import { cn } from "~/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Icons from "../shared/icons";
 import LogoutButton from "../shared/logout-button";
 
@@ -35,7 +36,7 @@ export default function SidebarNav({ className, ...props }: SidebarNavProps) {
   return (
     <nav
       className={cn(
-        "flex flex-col h-full gap-y-2 lg:flex-col lg:gap-y-1.5",
+        "flex h-full flex-col gap-y-2 lg:flex-col lg:gap-y-1.5",
         "max-w-xs", // Limita a largura
         className
       )}
@@ -50,7 +51,7 @@ export default function SidebarNav({ className, ...props }: SidebarNavProps) {
             isActive(item.href)
               ? "bg-muted hover:bg-muted"
               : "hover:bg-transparent hover:underline",
-            "flex items-center justify-start w-full" // Adiciona 'w-full' para manter largura total
+            "flex w-full items-center justify-start" // Adiciona 'w-full' para manter largura total
           )}
         >
           {<item.icon className="mr-2 h-4 w-4" />} {item.title}

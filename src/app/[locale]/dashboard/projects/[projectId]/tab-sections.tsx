@@ -1,5 +1,5 @@
 import { type Project } from "@prisma/client";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DeleteCard from "./delete-card";
 import EditableDetails from "./editable-details";
 

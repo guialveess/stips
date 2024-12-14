@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "~/components/ui/dialog";
+} from "@/components/ui/dialog";
 import AuthForm from "./auth-form";
 
 export default function LoginModal() {
@@ -20,7 +20,7 @@ export default function LoginModal() {
         <DialogHeader>
           <DialogTitle asChild>
             <h2 className="font-semibold tracking-tight transition-colors">
-             Entrar
+              Entrar
             </h2>
           </DialogTitle>
         </DialogHeader>

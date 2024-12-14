@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card } from "~/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { getProjects } from "./action";
 import CreateProjectModal from "./create-project-modal";
 

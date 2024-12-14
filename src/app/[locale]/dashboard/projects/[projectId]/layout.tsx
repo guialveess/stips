@@ -1,4 +1,4 @@
-import GoBack from "~/components/go-back";
+import GoBack from "@/components/go-back";
 
 export default function SingleProjectLayout({
   children,

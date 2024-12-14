@@ -1,7 +1,7 @@
 import { LanguagesIcon } from "lucide-react";
 import { BrandIcons } from "../shared/brand-icons";
 import { Card } from "../ui/card";
-import { getScopedI18n } from "~/locales/server";
+import { getScopedI18n } from "@/locales/server";
 
 export default async function Features() {
   const scopedT = await getScopedI18n("features");
@@ -84,7 +84,7 @@ export default async function Features() {
         </div>
         <div className="mx-auto text-center md:max-w-[58rem]">
           <p className="leading-normal text-primary/70 sm:text-lg sm:leading-7">
-            {scopedT('aboutMd')}
+            {scopedT("aboutMd")}
             <a
               href="https://velite.js.org/"
               target="_blank"

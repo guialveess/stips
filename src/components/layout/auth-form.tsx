@@ -5,9 +5,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button, buttonVariants } from "~/components/ui/button";
-import { toast } from "~/hooks/use-toast";
-import { cn } from "~/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 import Icons from "../shared/icons";
 import { Input } from "../ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
@@ -68,7 +68,8 @@ export default function AuthForm() {
       setCurrentStep(2);
       toast({
         title: "OTP enviado!",
-        description: "Por favor, verifique sua caixa de entrada de e-mail agora",
+        description:
+          "Por favor, verifique sua caixa de entrada de e-mail agora",
       });
       setCountdown(30);
     } catch (error) {
@@ -131,7 +132,7 @@ export default function AuthForm() {
             <div className="flex flex-col gap-2.5">
               <div>
                 <Label className="" htmlFor="email">
-                 Seu Email
+                  Seu Email
                 </Label>
                 <Input
                   id="email"
@@ -180,7 +181,7 @@ export default function AuthForm() {
         <>
           <p className="mb-4 text-center">
             <span className="">
-            Enviamos um código de 6 dígitos para {getValues("email")}.
+              Enviamos um código de 6 dígitos para {getValues("email")}.
             </span>{" "}
             Insira-o abaixo para verificação.
           </p>
@@ -190,7 +191,7 @@ export default function AuthForm() {
           >
             <div>
               <Label className="sr-only" htmlFor="otp">
-              Digite OTP
+                Digite OTP
               </Label>
               <div className="">
                 <InputOTP
@@ -221,7 +222,7 @@ export default function AuthForm() {
               {isVerifying && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
-            Verificar Código
+              Verificar Código
             </Button>
           </form>
           <div className="mt-4 flex items-center justify-between text-sm text-gray-600">

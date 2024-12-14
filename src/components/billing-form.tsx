@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Icons from "~/components/shared/icons";
-import { Button } from "~/components/ui/button";
+import Icons from "@/components/shared/icons";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,10 +10,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
-import { toast } from "~/hooks/use-toast";
-import { cn, formatDate } from "~/lib/utils";
-import { type UserSubscriptionPlan } from "~/types";
+} from "@/components/ui/card";
+import { toast } from "@/hooks/use-toast";
+import { cn, formatDate } from "@/lib/utils";
+import { type UserSubscriptionPlan } from "@/types";
 interface BillingFormProps extends React.HTMLAttributes<HTMLFormElement> {
   subscriptionPlan: UserSubscriptionPlan & {
     isCanceled: boolean;

@@ -6,8 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { useChangeLocale, useCurrentLocale } from "~/locales/client";
+} from "@/components/ui/dropdown-menu";
+import { useChangeLocale, useCurrentLocale } from "@/locales/client";
 import { Button } from "../ui/button";
 
 const locales = [
@@ -29,7 +29,7 @@ export default function LocaleToggler() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="w-9 px-0">
-          <LanguagesIcon className=" h-5 w-5 " />
+          <LanguagesIcon className="h-5 w-5" />
           <span className="sr-only">Change Locale</span>
         </Button>
       </DropdownMenuTrigger>

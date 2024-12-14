@@ -2,9 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import CopyButton from "~/components/copy-button";
-import Icons from "~/components/shared/icons";
-import { Button } from "~/components/ui/button";
+import CopyButton from "@/components/copy-button";
+import Icons from "@/components/shared/icons";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,9 +12,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { toast } from "~/hooks/use-toast";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
 import { updateProjectById } from "../action";
 import { projectSchema, type ProjectFormValues } from "../create-project-modal";
 

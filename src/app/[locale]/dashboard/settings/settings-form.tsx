@@ -6,8 +6,8 @@ import { Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Button } from "~/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -16,10 +16,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { useToast } from "~/hooks/use-toast";
-import { settingsSchema, type SettingsValues } from "~/types";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+import { settingsSchema, type SettingsValues } from "@/types";
 import {
   removeNewImageFromCDN,
   removeUserOldImageFromCDN,
@@ -27,10 +27,10 @@ import {
 } from "./actions";
 
 const ImageUploadModal = dynamic(
-  () => import("~/components/layout/image-upload-modal")
+  () => import("@/components/layout/image-upload-modal")
 );
 const CancelConfirmModal = dynamic(
-  () => import("~/components/layout/cancel-confirm-modal")
+  () => import("@/components/layout/cancel-confirm-modal")
 );
 
 export default function SettingsForm({ currentUser }: { currentUser: User }) {

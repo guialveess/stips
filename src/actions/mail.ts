@@ -3,8 +3,8 @@
 import ThanksTemp from "emails/thanks";
 import VerificationTemp from "emails/verification";
 import { nanoid } from "nanoid";
-import { resend } from "~/lib/server/resend";
-import { type SendOTPProps, type SendWelcomeEmailProps } from "~/types";
+import { resend } from "@/lib/server/resend";
+import { type SendOTPProps, type SendWelcomeEmailProps } from "@/types";
 
 export const sendWelcomeEmail = async ({
   toMail,

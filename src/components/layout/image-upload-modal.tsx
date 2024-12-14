@@ -13,9 +13,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "~/components/ui/dialog";
-import { toast } from "~/hooks/use-toast";
-import { useUploadThing } from "~/lib/client/uploadthing";
+} from "@/components/ui/dialog";
+import { toast } from "@/hooks/use-toast";
+import { useUploadThing } from "@/lib/client/uploadthing";
 import Icons from "../shared/icons";
 import { Button } from "../ui/button";
 
@@ -97,7 +97,7 @@ export default function ImageUploadModal({
       </DialogTrigger>
       <DialogContent className="max-w-[450px]">
         <DialogHeader>
-          <DialogTitle>Image Upload</DialogTitle>
+          <DialogTitle>Enviar Imagem</DialogTitle>
         </DialogHeader>
         <div>
           {preview ? (
@@ -124,7 +124,7 @@ export default function ImageUploadModal({
                   {isUploading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Uploading...
+                      Enviando...
                     </>
                   ) : (
                     "Upload"
@@ -143,7 +143,7 @@ export default function ImageUploadModal({
                   <Icons.download size={40} />
                 </div>
                 <p className="text-sm">
-                  Drop <em>or</em> Click Here
+                  Arraste <em>ou</em> Clique aqui
                 </p>
               </div>
             </div>
@@ -153,7 +153,7 @@ export default function ImageUploadModal({
           <div className="text-right text-xs leading-normal">
             <p>
               <span className="text-sm text-destructive">*</span>
-              {`Only Image files are supported and size limit up to ${routeConfig?.image?.maxFileSize}.`}
+              {`Apenas arquivos de imagem são suportados e o tamanho é limitado ${routeConfig?.image?.maxFileSize}.`}
             </p>
           </div>
         </DialogFooter>

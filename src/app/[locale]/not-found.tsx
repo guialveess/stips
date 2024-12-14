@@ -1,4 +1,4 @@
-import { getScopedI18n } from "~/locales/server";
+import { getScopedI18n } from "@/locales/server";
 
 async function NotFound() {
   const t = await getScopedI18n("notFound");

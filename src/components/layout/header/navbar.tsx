@@ -1,19 +1,19 @@
 "use client";
 
-import { Session } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import LogoutButton from "~/components/shared/logout-button";
-import { buttonVariants } from "~/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
-import { cn } from "~/lib/utils";
+import LogoutButton from "@/components/shared/logout-button";
+import { buttonVariants } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 export default function Navbar({
   session,
   headerText,
 }: {
-  session: Session;
+  session: PrismaClient;
   headerText: {
     changelog: string;
     about: string;
@@ -25,9 +25,7 @@ export default function Navbar({
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <nav className="flex h-full items-center justify-between">
-     
       <div className="hidden items-center gap-12 lg:flex 2xl:gap-16">
-       
         <div className="flex items-center gap-x-2">
           {session ? (
             <Link
@@ -85,7 +83,7 @@ export default function Navbar({
                   href="/login"
                   className={buttonVariants()}
                   onClick={() => setIsModalOpen(false)}
-                > 
+                >
                   {headerText.login}
                 </Link>
               )}

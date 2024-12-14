@@ -3,9 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { generateRandomString, RandomReader } from "@oslojs/crypto/random";
-import { deleteSessionTokenCookie } from "~/lib/server/cookies";
-import prisma from "~/lib/server/prisma";
-import { getCurrentSession, invalidateSession } from "~/lib/server/session";
+import { deleteSessionTokenCookie } from "@/lib/server/cookies";
+import prisma from "@/lib/server/prisma";
+import { getCurrentSession, invalidateSession } from "@/lib/server/session";
 
 const digits = "0123456789";
 

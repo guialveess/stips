@@ -2,11 +2,11 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { ArcticFetchError, OAuth2RequestError } from "arctic";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { sendWelcomeEmail } from "~/actions/mail";
-import { setSessionTokenCookie } from "~/lib/server/cookies";
-import { github } from "~/lib/server/github";
-import prisma from "~/lib/server/prisma";
-import { createSession, generateSessionToken } from "~/lib/server/session";
+import { sendWelcomeEmail } from "@/actions/mail";
+import { setSessionTokenCookie } from "@/lib/server/cookies";
+import { github } from "@/lib/server/github";
+import prisma from "@/lib/server/prisma";
+import { createSession, generateSessionToken } from "@/lib/server/session";
 
 export const GET = async (request: Request) => {
   const url = new URL(request.url);

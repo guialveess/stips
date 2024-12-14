@@ -2,13 +2,13 @@ import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
-import Footer from "~/components/layout/footer";
-import Header from "~/components/layout/header";
-import ThemeProvider from "~/components/shared/theme-provider";
-import { Toaster } from "~/components/ui/toaster";
-import { siteConfig, siteUrl } from "~/config/site";
-import { cn } from "~/lib/utils";
-import { I18nProviderClient } from "~/locales/client";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import Footer from "@/components/layout/footer";
+import Header from "@/components/layout/header";
+import { Toaster } from "@/components/ui/toaster";
+import { siteConfig, siteUrl } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { I18nProviderClient } from "@/locales/client";
 import "../globals.css";
 
 type Props = {
@@ -93,8 +93,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-
-
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -115,6 +113,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
   return (
     <html lang={locale}>
       <body
@@ -124,7 +123,7 @@ export default async function RootLayout({
           fontHeading.variable
         )}
       >
-       
+        <ThemeProvider/>
           <Header />
           <main>
             {children}
@@ -134,14 +133,13 @@ export default async function RootLayout({
             <Footer />
           </I18nProviderClient>
           <Toaster />
-        
+          {process.env.NODE_ENV === "production" && (
+            <Script
+              src="https://umami.moinulmoin.com/script.js"
+              data-website-id="bc66d96a-fc75-4ecd-b0ef-fdd25de8113c"
+            />
+          )}
       </body>
-      {process.env.NODE_ENV === "production" && (
-        <Script
-          src="https://umami.moinulmoin.com/script.js"
-          data-website-id="bc66d96a-fc75-4ecd-b0ef-fdd25de8113c"
-        />
-      )}
     </html>
   );
 }

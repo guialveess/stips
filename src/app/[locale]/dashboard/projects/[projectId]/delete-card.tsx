@@ -1,6 +1,6 @@
 "use client";
 import { useTransition } from "react";
-import Icons from "~/components/shared/icons";
+import Icons from "@/components/shared/icons";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,11 +10,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "~/components/ui/alert-dialog";
-import { Button } from "~/components/ui/button";
-import { Card, CardDescription, CardTitle } from "~/components/ui/card";
-import { toast } from "~/hooks/use-toast";
-import { isRedirectError } from "~/lib/utils";
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { toast } from "@/hooks/use-toast";
+import { isRedirectError } from "@/lib/utils";
 import { deleteProjectById } from "../action";
 
 export default function DeleteCard({ id }: { id: string }) {

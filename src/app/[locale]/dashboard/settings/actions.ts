@@ -1,10 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import prisma from "~/lib/server/prisma";
-import { utapi } from "~/lib/server/uploadthing";
-import { getImageKeyFromUrl, isOurCdnUrl } from "~/lib/utils";
-import { type payload } from "~/types";
+import prisma from "@/lib/server/prisma";
+import { utapi } from "@/lib/server/uploadthing";
+import { getImageKeyFromUrl, isOurCdnUrl } from "@/lib/utils";
+import { type payload } from "@/types";
 
 export const updateUser = async (id: string, payload: payload) => {
   await prisma.user.update({

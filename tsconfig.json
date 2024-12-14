@@ -28,14 +28,11 @@
       }
     ],
     "baseUrl": ".",
-    "paths": {
-      "~/*": [
-        "./src/*"
-      ],
-      "content": [
-        "./.velite"
-      ]
-    }
+"paths": {
+  "@/*": ["src/*"], // Certifique-se de que "src" existe
+  "@content/*": ["./.velite/*"] // Confirme que ".velite" é usado
+}
+
   },
   "include": [
     "next-env.d.ts",

@@ -1,10 +1,10 @@
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
-import { BrandIcons } from "~/components/shared/brand-icons";
-import Icons from "~/components/shared/icons";
-import { buttonVariants } from "~/components/ui/button";
-import { nFormatter } from "~/lib/utils";
-import { getScopedI18n } from "~/locales/server";
+import { BrandIcons } from "@/components/shared/brand-icons";
+import Icons from "@/components/shared/icons";
+import { buttonVariants } from "@/components/ui/button";
+import { nFormatter } from "@/lib/utils";
+import { getScopedI18n } from "@/locales/server";
 
 export default async function Hero() {
   const scopedT = await getScopedI18n("hero");
@@ -39,7 +39,6 @@ export default async function Hero() {
             <Link className={buttonVariants() + " gap-x-2"} href="/login">
               {scopedT("firstButton")}
             </Link>
-           
           </div>
         </div>
         <div className="w-full">
