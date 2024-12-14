@@ -2,6 +2,7 @@
 
 import { PrismaClient } from "@prisma/client";
 import { MenuIcon } from "lucide-react";
+import { Session } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,7 +14,7 @@ export default function Navbar({
   session,
   headerText,
 }: {
-  session: PrismaClient;
+  session?: Session | null;
   headerText: {
     changelog: string;
     about: string;
