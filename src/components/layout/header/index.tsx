@@ -7,10 +7,11 @@ export default async function Header() {
   await connection();
   const { session } = await getCurrentSession();
   const scopedT = await getScopedI18n("header");
+
   const headerText = {
     changelog: scopedT("changelog"),
     about: scopedT("about"),
-    login: scopedT("login"),
+    Entrar: scopedT("login"), // Renomeado para "Entrar"
     dashboard: scopedT("dashboard"),
   };
 

@@ -68,7 +68,7 @@ export default function AuthForm() {
       setCurrentStep(2);
       toast({
         title: "OTP enviado!",
-        description: "Por favor, verifique sua caixa de entrada de e-mail",
+        description: "Por favor, verifique sua caixa de entrada de e-mail agora",
       });
       setCountdown(30);
     } catch (error) {
