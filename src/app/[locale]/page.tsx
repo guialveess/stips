@@ -4,8 +4,6 @@ import OpenSource from "~/components/sections/open-source";
 import Pricing from "~/components/sections/pricing";
 
 export default async function Home() {
-
-  
   return (
     <>
       <Hero />
