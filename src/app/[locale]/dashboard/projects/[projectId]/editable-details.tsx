@@ -21,32 +21,40 @@ import { projectSchema, type ProjectFormValues } from "../create-project-modal";
 export default function EditableDetails({
   initialValues,
 }: {
-  initialValues: ProjectFormValues & { id: string };
+  initialValues: ProjectFormValues & { id: string; shareUrl: string };
 }) {
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
     values: initialValues,
   });
 
+  // Detecta o ambiente e define a URL base
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://boiderplatenext-01.vercel.app"
+      : "http://localhost:3000";
+
   async function onSubmit(values: ProjectFormValues) {
     try {
       await updateProjectById(initialValues.id, values);
       toast({
-        title: "Project Updated successfully.",
+        title: "Project updated successfully.",
       });
       form.reset();
     } catch (error) {
       console.log(error);
       toast({
-        title: "Error creating project.",
+        title: "Error updating project.",
         description: "Please try again.",
         variant: "destructive",
       });
     }
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-6">
+        {/* ID Field */}
         <FormItem>
           <FormLabel>ID</FormLabel>
           <FormControl>
@@ -58,6 +66,7 @@ export default function EditableDetails({
           <FormMessage />
         </FormItem>
 
+        {/* Name Field */}
         <FormField
           control={form.control}
           name="name"
@@ -71,6 +80,8 @@ export default function EditableDetails({
             </FormItem>
           )}
         />
+
+        {/* Domain Field */}
         <FormField
           control={form.control}
           name="domain"
@@ -84,6 +95,24 @@ export default function EditableDetails({
             </FormItem>
           )}
         />
+
+        {/* Public URL Field */}
+        <FormItem>
+          <FormLabel>URL Pública</FormLabel>
+          <FormControl>
+            <div className="relative">
+              <Input
+                value={`${baseUrl}/project/${initialValues.shareUrl}`}
+                readOnly
+                disabled
+              />
+              <CopyButton content={`${baseUrl}/project/${initialValues.shareUrl}`} />
+            </div>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+
+        {/* Submit Button */}
         <Button
           disabled={form.formState.isSubmitting || !form.formState.isDirty}
           type="submit"

@@ -2,6 +2,7 @@
 
 import { type Project } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
 import { getUserSubscriptionPlan } from "@/actions/subscription";
 import prisma from "@/lib/server/prisma";
@@ -15,18 +16,22 @@ interface Payload {
 export async function createProject(payload: Payload) {
   const { user } = await getCurrentSession();
 
-  await prisma.project.create({
+  const shareUrl = nanoid(); // Gera um identificador único para o URL público
+
+  const project = await prisma.project.create({
     data: {
       ...payload,
+      shareUrl,
       user: {
         connect: {
           id: user?.id,
-        },
+        },  
       },
     },
   });
 
   revalidatePath(`/dashboard/projects`);
+  return project;
 }
 
 export async function checkIfFreePlanLimitReached() {
@@ -59,15 +64,16 @@ export async function getProjects() {
   return projects as Project[];
 }
 
-export async function getProjectById(id: string) {
-  const { user } = await getCurrentSession();
-  const project = await prisma.project.findFirst({
-    where: {
-      id,
-      userId: user?.id,
-    },
+export async function getProjectById(id: string | undefined) {
+  if (!id) {
+    throw new Error("ID do projeto não foi fornecido.");
+  }
+
+  const project = await prisma.project.findUnique({
+    where: { id },
   });
-  return project as Project;
+
+  return project;
 }
 
 export async function updateProjectById(id: string, payload: Payload) {
@@ -80,6 +86,20 @@ export async function updateProjectById(id: string, payload: Payload) {
     data: payload,
   });
   revalidatePath(`/dashboard/projects`);
+}
+
+export async function getProjectByShareUrl(shareUrl: string) {
+  console.log("Buscando projeto com shareUrl:", shareUrl);
+
+  const project = await prisma.project.findUnique({
+    where: { shareUrl },
+  });
+
+  if (!project) {
+    console.log("Nenhum projeto encontrado com shareUrl:", shareUrl);
+  }
+
+  return project;
 }
 
 export async function deleteProjectById(id: string) {
