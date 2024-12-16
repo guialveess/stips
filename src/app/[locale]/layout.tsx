@@ -28,7 +28,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = params;
+  const resolvedParams = await params; // Aguarda a Promise ser resolvida
+  const { locale } = resolvedParams; // Agora você pode acessar `locale`
   const site = siteConfig(locale);
 
   const siteOgImage = `${siteUrl}/api/og?locale=${locale}`;
