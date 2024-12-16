@@ -2,13 +2,14 @@ import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
-import { ThemeProvider } from "@/providers/ThemeProvider";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig, siteUrl } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { I18nProviderClient } from "@/locales/client";
+import { ThemeProvider } from "next-themes"; // Importa o ThemeProvider
 import "../globals.css";
 
 type Props = {
@@ -123,15 +124,29 @@ export default async function RootLayout({
           fontHeading.variable
         )}
       >
-        <ThemeProvider/>
-          <Header />
+        <ThemeProvider attribute="class" defaultTheme="system">
+          
+          <header className="fixed right-0 top-0 z-[50] w-full">
+            <nav className="flex items-center justify-between px-4 py-2">
+              {/* Conteúdo no lado esquerdo */}
+              <div className="flex items-center">
+                <span className="text-lg font-bold"> <Header /></span>
+              </div>
+
+              {/* Componente ThemeToggle no lado direito */}
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+              </div>
+            </nav>
+          </header>
+
           <main>
             {children}
             {loginDialog}
           </main>
-          <I18nProviderClient locale={locale}>
+          {/* <I18nProviderClient locale={locale}> */}
             <Footer />
-          </I18nProviderClient>
+          {/* </I18nProviderClient> */}
           <Toaster />
           {process.env.NODE_ENV === "production" && (
             <Script
@@ -139,6 +154,7 @@ export default async function RootLayout({
               data-website-id="bc66d96a-fc75-4ecd-b0ef-fdd25de8113c"
             />
           )}
+        </ThemeProvider>
       </body>
     </html>
   );

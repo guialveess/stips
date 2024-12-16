@@ -1,5 +1,7 @@
 import { getProjectByShareUrl } from "@/app/[locale]/dashboard/projects/action";
 import { BrowserComponent } from "@/components/mock-browser";
+import {Spotlight} from "@/components/Spotlight"
+
 
 export default async function PublicProjectPage({
   params,
@@ -35,6 +37,10 @@ export default async function PublicProjectPage({
 
   return (
     <div className="flex h-screen items-center justify-center">
+      <Spotlight
+        className="-top-40 left-0 md:left-20 md:-top-20"
+        fill="black"
+      />
       {/* Exibe o shareUrl no BrowserComponent */}
       <BrowserComponent className="h-[300px] w-full max-w-[600px]" shareUrl={publicUrl}>
         <section className="flex h-full w-full flex-col items-center justify-center space-y-4 text-center">

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Icons from "../shared/icons";
@@ -57,7 +56,6 @@ export default function SidebarNav({ className, ...props }: SidebarNavProps) {
           {<item.icon className="mr-2 h-4 w-4" />} {item.title}
         </Link>
       ))}
-
       <LogoutButton className="mt-auto hidden lg:block" />
     </nav>
   );

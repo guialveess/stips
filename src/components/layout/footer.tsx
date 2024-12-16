@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { siteConfig } from "@/config/site";
 import LocaleToggler from "../shared/locale-toggler";
-import ThemeToggle from "../shared/theme-toggle";
 
 export default function Footer() {
   return (
@@ -27,7 +26,7 @@ export default function Footer() {
           <Suspense>
             <LocaleToggler />
           </Suspense>
-          <ThemeToggle />
+         
         </div>
       </div>
     </footer>
