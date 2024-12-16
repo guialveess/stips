@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: site.name,
       description: site.description,
       images: [siteOgImage],
-      creator: "@immoinulmoin",
+      creator: "@guiialvess",
     },
     icons: {
       icon: "/favicon.ico",
