@@ -48,7 +48,7 @@ export async function checkIfFreePlanLimitReached() {
     },
   });
 
-  return count >= 3;
+  return count >= 1;
 }
 
 export async function getProjects() {

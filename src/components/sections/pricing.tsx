@@ -34,7 +34,7 @@ export default async function Pricing() {
           >
             <CardHeader>
               <CardTitle>
-                Free Plan{" "}
+                Plano gratuito{" "}
                 {subscription && !subscription?.isPro && (
                   <Badge className="absolute right-0 top-0 m-4">Current</Badge>
                 )}

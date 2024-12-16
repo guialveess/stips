@@ -36,8 +36,8 @@ export function BillingForm({
 
     if (!response?.ok) {
       return toast({
-        title: "Something went wrong.",
-        description: "Please refresh the page and try again.",
+        title: "Algo deu errado!",
+        description: "Atualize a página e tente novamente.",
         variant: "destructive",
       });
     }
@@ -55,10 +55,10 @@ export function BillingForm({
     <form className={cn(className)} onSubmit={onSubmit} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Subscription</CardTitle>
+          <CardTitle>Subscrição</CardTitle>
           <CardDescription>
             <em>
-              Currently on the <strong>{subscriptionPlan.name}</strong> plan.
+              Atualmente no <strong>{subscriptionPlan.name}</strong> plan.
             </em>
           </CardDescription>
         </CardHeader>
@@ -70,7 +70,9 @@ export function BillingForm({
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            {subscriptionPlan.isPro ? "Manage Subscription" : "Upgrade to PRO"}
+            {subscriptionPlan.isPro
+              ? "Manage Subscription"
+              : "Atualize para PRO"}
           </Button>
           {subscriptionPlan.isPro ? (
             <p className="rounded-full text-xs font-medium md:self-end">

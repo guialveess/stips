@@ -28,15 +28,15 @@ export default async function Billing() {
           <AlertTriangleIcon className="h-5 w-5 shrink-0" />
           <div>
             <AlertDescription>
-              <strong>ChadNext</strong> just demonstrates how to use Stripe in
-              Next.js App router. Please use test cards from{" "}
+              <strong>Meu Template</strong> apenas demonstra como usar o Stripe em
+              Roteador do aplicativo Next.js. Utilize cartões de teste de{" "}
               <a
                 href="https://stripe.com/docs/testing#cards"
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium underline underline-offset-4"
               >
-                Stripe docs
+                Documentação do Stripe
               </a>
               .
             </AlertDescription>

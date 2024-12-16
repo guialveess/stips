@@ -131,9 +131,6 @@ export default function AuthForm() {
           <form onSubmit={handleSubmit(onEmailSubmit)}>
             <div className="flex flex-col gap-2.5">
               <div>
-                <Label className="" htmlFor="email">
-                  Seu Email
-                </Label>
                 <Input
                   id="email"
                   placeholder="seumelhoremail@gmail.com"

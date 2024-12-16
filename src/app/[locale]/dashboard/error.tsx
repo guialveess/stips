@@ -18,7 +18,7 @@ export default function Error({
   return (
     <div className="flex h-[calc(100vh-160px)] w-full flex-col items-center justify-center gap-y-4">
       <h2 className="text-5xl font-bold text-destructive">
-        Oops, Something Went Wrong!
+      Ops, algo deu errado!
       </h2>
       <Button onClick={() => reset()}>Try Again</Button>
     </div>

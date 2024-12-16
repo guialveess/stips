@@ -165,7 +165,7 @@ export default function SettingsForm({ currentUser }: { currentUser: User }) {
                 Atualizando...
               </>
             ) : (
-              "Update"
+              "Salvar"
             )}
           </Button>
         </div>

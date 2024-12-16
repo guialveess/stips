@@ -106,7 +106,9 @@ export default function EditableDetails({
                 readOnly
                 disabled
               />
-              <CopyButton content={`${baseUrl}/project/${initialValues.shareUrl}`} />
+              <CopyButton
+                content={`${baseUrl}/project/${initialValues.shareUrl}`}
+              />
             </div>
           </FormControl>
           <FormMessage />

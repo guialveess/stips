@@ -43,11 +43,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ],
     authors: [
       {
-        name: "moinulmoin",
-        url: "https://moinulmoin.com",
+        name: "guiialvess",
+        url: "https://guiialves.vercel.app/",
       },
     ],
-    creator: "Moinul Moin",
+    creator: "Guilherme Alves",
     openGraph: {
       type: "website",
       locale: locale,

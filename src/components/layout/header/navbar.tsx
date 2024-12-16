@@ -10,6 +10,7 @@ import LogoutButton from "@/components/shared/logout-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+
 export default function Navbar({
   session,
   headerText,
@@ -18,7 +19,7 @@ export default function Navbar({
   headerText: {
     changelog: string;
     about: string;
-    Entrar: string;
+    Entrar: string; // Atualizado para "Entrar"
     dashboard: string;
     [key: string]: string;
   };
@@ -41,7 +42,7 @@ export default function Navbar({
             </Link>
           ) : (
             <Link href="/login" className={buttonVariants()}>
-              {headerText.login}
+              {headerText.Entrar} {/* Texto atualizado */}
             </Link>
           )}
         </div>
@@ -85,7 +86,7 @@ export default function Navbar({
                   className={buttonVariants()}
                   onClick={() => setIsModalOpen(false)}
                 >
-                  {headerText.login}
+                  {headerText.Entrar} {/* Texto atualizado */}
                 </Link>
               )}
             </div>

@@ -11,13 +11,13 @@ export default function TabSections({ project }: { project: Project }) {
         <TabsTrigger value="settings">Configurações</TabsTrigger>
       </TabsList>
       <TabsContent value="details">
-  <EditableDetails
-    initialValues={{
-      ...project,
-      shareUrl: project.shareUrl || "", // Garante que `shareUrl` seja uma string
-    }}
-  />
-</TabsContent>
+        <EditableDetails
+          initialValues={{
+            ...project,
+            shareUrl: project.shareUrl || "", // Garante que `shareUrl` seja uma string
+          }}
+        />
+      </TabsContent>
 
       <TabsContent value="settings">
         <DeleteCard id={project.id} />

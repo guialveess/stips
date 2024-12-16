@@ -8,14 +8,14 @@ export default function CopyButton({ content }: { content: string }) {
   const copyToClipboard = (content: string) => {
     if (!navigator.clipboard) {
       toast({
-        title: "Error copying!",
-        description: "Please try again.",
+        title: "Erro ao copiar!",
+        description: "Por favor, tente novamente.",
         variant: "destructive",
       });
     }
     navigator.clipboard.writeText(content);
     toast({
-      title: "Project ID copied!",
+      title: "ID do projeto copiado!",
     });
   };
 
@@ -27,7 +27,7 @@ export default function CopyButton({ content }: { content: string }) {
       variant="ghost"
       onClick={() => copyToClipboard(content)}
     >
-      <span className="sr-only">Copy</span>
+      <span className="sr-only">Copiar</span>
       <Icons.copy className="h-3 w-3" />
     </Button>
   );

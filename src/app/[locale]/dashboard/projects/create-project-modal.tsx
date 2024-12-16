@@ -61,12 +61,12 @@ export default function CreateProjectModal() {
       console.log(error);
       if (error instanceof FreePlanLimitError) {
         return toast({
-          title: "Free plan limit reached. Please upgrade your plan.",
+          title: "Limite do plano gratuito atingido. Atualize seu plano.",
           variant: "destructive",
         });
       }
       return toast({
-        title: "Error creating project. Please try again.",
+        title: "Erro ao criar projeto. Por favor, tente novamente.",
         variant: "destructive",
       });
     }
