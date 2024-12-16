@@ -7,19 +7,28 @@ import Header from "@/components/layout/header";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig, siteUrl } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { I18nProviderClient } from "@/locales/client";
-import { ThemeProvider } from "next-themes"; // Importa o ThemeProvider
 import "../globals.css";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
+
+const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const fontHeading = localFont({
+  src: "../../assets/fonts/CalSans-SemiBold.woff2",
+  variable: "--font-heading",
+});
 
 type Props = {
-  params: Promise<{ locale: string }>;
-  searchParams: { [key: string]: string | string[] | undefined };
+  children: React.ReactNode;
+  loginDialog: React.ReactNode;
+  params: { locale: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const p = await params;
-  const locale = p.locale;
+  const { locale } = params;
   const site = siteConfig(locale);
 
   const siteOgImage = `${siteUrl}/api/og?locale=${locale}`;
@@ -94,29 +103,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const fontSans = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const fontHeading = localFont({
-  src: "../../assets/fonts/CalSans-SemiBold.woff2",
-  variable: "--font-heading",
-});
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
   loginDialog,
   params,
-}: {
-  children: React.ReactNode;
-  loginDialog: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+}: Props) {
+  const { locale } = params;
 
   return (
     <html lang={locale}>
+      
       <body
         className={cn(
           "font-sans antialiased",
@@ -124,37 +120,37 @@ export default async function RootLayout({
           fontHeading.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system">
-          
-          <header className="fixed right-0 top-0 z-[50] w-full">
-            <nav className="flex items-center justify-between px-4 py-2">
-              {/* Conteúdo no lado esquerdo */}
-              <div className="flex items-center">
-                <span className="text-lg font-bold"> <Header /></span>
-              </div>
+        <ThemeProvider>
+        <header className="fixed right-0 top-0 z-[50] w-full">
+          <nav className="flex items-center justify-between px-4 py-2">
+            {/* Conteúdo no lado esquerdo */}
+            <div className="flex items-center">
+              <span className="text-lg font-bold">
+                <Header />
+              </span>
+            </div>
 
-              {/* Componente ThemeToggle no lado direito */}
-              <div className="flex items-center gap-2">
-                <ThemeToggle />
-              </div>
-            </nav>
-          </header>
+            {/* O componente ThemeToggle precisa ser cliente */}
+            <div className="flex items-center gap-2">
+         
+              <ThemeToggle/>
+            </div>
+          </nav>
+        </header>
 
-          <main>
-            {children}
-            {loginDialog}
-          </main>
-          {/* <I18nProviderClient locale={locale}> */}
-            <Footer />
-          {/* </I18nProviderClient> */}
-          <Toaster />
-          {process.env.NODE_ENV === "production" && (
-            <Script
-              src="https://umami.moinulmoin.com/script.js"
-              data-website-id="bc66d96a-fc75-4ecd-b0ef-fdd25de8113c"
-            />
-          )}
+        <main>
+          {children}
+          {loginDialog}
+        </main>
+        <Footer />
+        <Toaster />
         </ThemeProvider>
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            src="https://umami.moinulmoin.com/script.js"
+            data-website-id="bc66d96a-fc75-4ecd-b0ef-fdd25de8113c"
+          />
+        )}
       </body>
     </html>
   );

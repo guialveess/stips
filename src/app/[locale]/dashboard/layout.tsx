@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import SidebarNav from "@/components/layout/sidebar-nav";
 import { getCurrentSession } from "@/lib/server/session";
-import { ThemeProvider } from "@/providers/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 
 interface DashboardLayoutProps {

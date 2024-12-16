@@ -1,22 +1,22 @@
 "use client";
 
-import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { type ThemeProviderProps } from "next-themes";
+import React, { useState, useEffect } from "react";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  const [mounted, setMounted] = React.useState(false);
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
 
-  React.useEffect(() => {
-    setMounted(true);
+  useEffect(() => {
+    setMounted(true); // Marca o componente como montado
   }, []);
 
   if (!mounted) {
-    return <>{children}</>; // Renderiza apenas o conteúdo sem o tema durante a hidratação
+    // Evita renderizar o ThemeProvider até que o cliente esteja montado
+    return <>{children}</>;
   }
 
   return (
-    <NextThemesProvider defaultTheme="light" enableSystem {...props}>
+    <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
       {children}
     </NextThemesProvider>
   );
