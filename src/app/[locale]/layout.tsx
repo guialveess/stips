@@ -103,16 +103,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
-  children,
-  loginDialog,
-  params,
-}: Props) {
+export default function RootLayout({ children, loginDialog, params }: Props) {
   const { locale } = params;
 
   return (
     <html lang={locale}>
-      
       <body
         className={cn(
           "font-sans antialiased",
@@ -121,29 +116,28 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider>
-        <header className="fixed right-0 top-0 z-[50] w-full">
-          <nav className="flex items-center justify-between px-4 py-2">
-            {/* Conteúdo no lado esquerdo */}
-            <div className="flex items-center">
-              <span className="text-lg font-bold">
-                <Header />
-              </span>
-            </div>
+          <header className="fixed right-0 top-0 z-[50] w-full">
+            <nav className="flex items-center justify-between px-4 py-2">
+              {/* Conteúdo no lado esquerdo */}
+              <div className="flex items-center">
+                <span className="text-lg font-bold">
+                  <Header />
+                </span>
+              </div>
 
-            {/* O componente ThemeToggle precisa ser cliente */}
-            <div className="flex items-center gap-2">
-         
-              <ThemeToggle/>
-            </div>
-          </nav>
-        </header>
+              {/* O componente ThemeToggle precisa ser cliente */}
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+              </div>
+            </nav>
+          </header>
 
-        <main>
-          {children}
-          {loginDialog}
-        </main>
-        <Footer />
-        <Toaster />
+          <main className="flex min-h-screen items-center justify-center">
+            {children}
+            {loginDialog}
+          </main>
+          <Footer />
+          <Toaster />
         </ThemeProvider>
         {process.env.NODE_ENV === "production" && (
           <Script

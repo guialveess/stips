@@ -1,3 +1,4 @@
+const { nextui } = require("@nextui-org/theme");
 const { fontFamily } = require("tailwindcss/defaultTheme");
 // @ts-ignore
 const {
@@ -13,6 +14,7 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/components/(card|ripple).js",
   ],
   theme: {
     container: {
@@ -104,5 +106,6 @@ module.exports = {
         { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
       );
     },
+    nextui(),
   ],
 };
