@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { FloatingNav } from "@/components/ui/floating-navbar";
+import { House, MessageSquareShare, CircleUserRound } from "lucide-react";
 import { settingsSchema, type SettingsValues } from "@/types";
 import {
   removeNewImageFromCDN,
@@ -32,6 +34,28 @@ const ImageUploadModal = dynamic(
 const CancelConfirmModal = dynamic(
   () => import("@/components/layout/cancel-confirm-modal")
 );
+
+const navItems = [
+  {
+    name: "Projetos",
+    link: "/dashboard/projects",
+    icon: <House className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "Pagamento",
+    link: "/dashboard/billing",
+    icon: (
+      <CircleUserRound className="h-4 w-4 text-neutral-500 dark:text-white" />
+    ),
+  },
+  {
+    name: "Configuração",
+    link: "/dashboard/settings",
+    icon: (
+      <MessageSquareShare className="h-4 w-4 text-neutral-500 dark:text-white" />
+    ),
+  },
+];
 
 export default function SettingsForm({ currentUser }: { currentUser: User }) {
   const oldImage = useRef(currentUser.picture ?? "");
@@ -100,7 +124,7 @@ export default function SettingsForm({ currentUser }: { currentUser: User }) {
     <Form {...form}>
       <form
         onSubmit={onSubmit}
-        className="max-w-2xl space-y-8 rounded-md border p-6"
+        className="mx-auto flex max-w-2xl flex-col space-y-8 rounded-md border p-6 lg:mb-20 lg:mt-20"
       >
         <FormField
           control={form.control}
@@ -109,7 +133,7 @@ export default function SettingsForm({ currentUser }: { currentUser: User }) {
             <FormItem>
               <FormLabel>Foto</FormLabel>
               <FormDescription>
-              Clique no avatar para fazer upload de um novo.
+                Clique no avatar para fazer upload de um novo.
               </FormDescription>
               <FormControl>
                 <Avatar className="group relative h-28 w-28 rounded-full">
@@ -168,6 +192,9 @@ export default function SettingsForm({ currentUser }: { currentUser: User }) {
               "Salvar"
             )}
           </Button>
+          <div className="w-full max-w-4xl">
+            <FloatingNav navItems={navItems} />
+          </div>
         </div>
       </form>
     </Form>

@@ -11,9 +11,11 @@ export default async function Header() {
   const scopedT = await getScopedI18n("header");
 
   const headerText = {
-    changelog: scopedT("changelog"),
-    about: scopedT("about"),
+    inicio: scopedT("inicio"),
+    payment: scopedT("payment"),
+    settings: scopedT("settings"),
     Entrar: scopedT("login"),
+
     dashboard: scopedT("dashboard"),
   };
 

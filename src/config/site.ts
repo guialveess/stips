@@ -2,7 +2,7 @@ export const siteUrl =
   process.env.NEXT_PUBLIC_APP_URL || "https://chadnext.moinulmoin.com";
 
 export const siteConfig = (locale?: string) => ({
-  name: "ChadNext",
+  name: "Stips",
   url: siteUrl + "/" + locale,
   ogImage: `${siteUrl}/${locale}/opengraph-image`,
   description: "Auth Boiderplate by Guilherme Alves",

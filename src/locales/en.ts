@@ -1,8 +1,9 @@
 export default {
   header: {
-    changelog: "Changelog",
-    about: "About",
+    inicio: "Início",
+    payment: "Pagamento", 
     login: "Login",
+    settings:"Configuração",
     dashboard: "Dashboard",
   },
   hero: {

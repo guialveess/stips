@@ -3,19 +3,42 @@ import { Card } from "@/components/ui/card";
 import { CircleCheck, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getProjects } from "./action";
+import { FloatingNav } from "@/components/ui/floating-navbar";
+import { House, MessageSquareShare, CircleUserRound } from "lucide-react";
 import CreateProjectModal from "./create-project-modal";
 
 export default async function Projects() {
   const projects = await getProjects();
+  const navItems = [
+    {
+      name: "Projetos",
+      link: "/dashboard/projects",
+      icon: <House className="h-4 w-4 text-neutral-500 dark:text-white" />,
+    },
+    {
+      name: "Pagamento",
+      link: "/dashboard/billing",
+      icon: (
+        <CircleUserRound className="h-4 w-4 text-neutral-500 dark:text-white" />
+      ),
+    },
+    {
+      name: "Configuração",
+      link: "/dashboard/settings",
+      icon: (
+        <MessageSquareShare className="h-4 w-4 text-neutral-500 dark:text-white" />
+      ),
+    },
+  ];
 
   return (
-    <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-4 p-4">
+    <div className="grid gap-6 p-4 md:grid-cols-3 lg:grid-cols-4">
       <CreateProjectModal />
 
       {projects.map((project) => (
         <Card
           key={project.id}
-          className="group relative flex flex-col gap-3 rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 hover:shadow-md transition-all"
+          className="group relative flex flex-col gap-3 rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 transition-all hover:shadow-md"
         >
           <div className="flex gap-2">
             {/* Icon Section */}
@@ -42,7 +65,6 @@ export default async function Projects() {
             </div>
 
             {/* Close Button */}
-          
           </div>
 
           {/* Clickable Area */}
@@ -54,6 +76,9 @@ export default async function Projects() {
           </Link>
         </Card>
       ))}
+      <div className="relative w-full">
+        <FloatingNav navItems={navItems} />
+      </div>
     </div>
   );
 }
