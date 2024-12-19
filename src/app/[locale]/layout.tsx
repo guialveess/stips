@@ -106,9 +106,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 
-export default function RootLayout({ children, loginDialog, params }: Props) {
-  const { locale } = params;
-
+export default async function RootLayout({
+  children,
+  loginDialog,
+  params,
+}: {
+  children: React.ReactNode;
+  loginDialog: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <html lang={locale}>
       <body
