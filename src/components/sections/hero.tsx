@@ -10,6 +10,7 @@ import { Badge } from "../ui/badge";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { HoverBorderGradient } from "../ui/hover-border-gradient";
+import FlickeringGrid from "@/components/ui/flickering-grid";
 import { SendingButton } from "../SendingButton";
 
 interface SendingButtonProps {
@@ -53,12 +54,23 @@ export default async function Hero() {
       </SendingButton>
     </div>
         </div>
-        <div className="w-full">
+
           <div className="flex w-full flex-wrap items-center justify-center gap-x-20 gap-y-10">
-            {/* Conteúdo futuro aqui */}
+        
+      <FlickeringGrid
+        className="z-0 relative inset-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
+        squareSize={4}
+        gridGap={6}
+        color="#60A5FA"
+        maxOpacity={0.5}
+        flickerChance={0.1}
+        height={800}
+        width={800}
+      />
+   
           </div>
         </div>
-      </div>
+      
     </section>
   );
 }

@@ -6,6 +6,7 @@ import { getProjects } from "./action";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { House, MessageSquareShare, CircleUserRound } from "lucide-react";
 import CreateProjectModal from "./create-project-modal";
+import FlickeringGrid from "@/components/ui/flickering-grid";
 
 export default async function Projects() {
   const projects = await getProjects();
@@ -32,52 +33,69 @@ export default async function Projects() {
   ];
 
   return (
-    <div className="grid gap-6 p-4 md:grid-cols-3 lg:grid-cols-4">
-      <CreateProjectModal />
+    <div className="relative min-h-screen bg-background">
+      {/* Flickering Grid Background */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none z-0">
+        <div className="relative size-[600px] rounded-s-large w-full bg-background overflow-hidden">
+          <FlickeringGrid
+            className="z-0 relative inset-0 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+            squareSize={6}
+            gridGap={6}
+            color="#60A5FA"
+            maxOpacity={0.5}
+            flickerChance={0.1}
+           
+          />
+        </div>
+      </div>
 
-      {projects.map((project) => (
-        <Card
-          key={project.id}
-          className="group relative flex flex-col gap-3 rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 transition-all hover:shadow-md"
-        >
-          <div className="flex gap-2">
-            {/* Icon Section */}
-            <CircleCheck
-              className="mt-0.5 shrink-0 text-emerald-500"
-              size={20}
-              strokeWidth={2}
-              aria-hidden="true"
-            />
+      {/* Main Content */}
+      <div className="relative grid gap-6 p-4 md:grid-cols-3 lg:grid-cols-4 z-10">
+        <CreateProjectModal />
 
-            {/* Project Details */}
-            <div className="flex grow flex-col gap-2">
-              <div className="space-y-1">
-                <h4 className="text-sm font-medium">{project.name}</h4>
-                <p className="text-xs text-muted-foreground">
-                  {`https://${project.domain}`}
-                </p>
-              </div>
+        {projects.map((project) => (
+          <Card
+            key={project.id}
+            className="group relative flex flex-col gap-3 rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 transition-all hover:shadow-md"
+          >
+            <div className="flex gap-2">
+              {/* Icon Section */}
+              <CircleCheck
+                className="mt-0.5 shrink-0 text-emerald-500"
+                size={20}
+                strokeWidth={2}
+                aria-hidden="true"
+              />
 
-              {/* Action Buttons */}
-              <div className="flex gap-2">
-                <Button size="sm">Ver Mais</Button>
+              {/* Project Details */}
+              <div className="flex grow flex-col gap-2">
+                <div className="space-y-1">
+                  <h4 className="text-sm font-medium">{project.name}</h4>
+                  <p className="text-xs text-muted-foreground">
+                    {`https://${project.domain}`}
+                  </p>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-2">
+                  <Button size="sm">Ver Mais</Button>
+                </div>
               </div>
             </div>
 
-            {/* Close Button */}
-          </div>
+            {/* Clickable Area */}
+            <Link
+              href={`/dashboard/projects/${project.id}`}
+              className="absolute inset-0"
+            >
+              <span className="sr-only">Ver detalhes do projeto</span>
+            </Link>
+          </Card>
+        ))}
 
-          {/* Clickable Area */}
-          <Link
-            href={`/dashboard/projects/${project.id}`}
-            className="absolute inset-0"
-          >
-            <span className="sr-only">Ver detalhes do projeto</span>
-          </Link>
-        </Card>
-      ))}
-      <div className="relative w-full">
-        <FloatingNav navItems={navItems} />
+        <div className="relative w-full">
+          <FloatingNav navItems={navItems} />
+        </div>
       </div>
     </div>
   );
