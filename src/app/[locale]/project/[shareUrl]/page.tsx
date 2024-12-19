@@ -57,7 +57,7 @@ export default async function PublicProjectPage({
   const publicUrl = `${baseUrl}/project/${shareUrl}`;
 
   return (
-    <div className="relative flex h-screen items-center justify-center overflow-hidden">
+    <div className=" flex h-screen items-center justify-center overflow-hidden">
       {/* Adicionando o GridPattern */}
       <GridPattern
         squares={[
