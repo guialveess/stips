@@ -7,6 +7,7 @@ import * as z from "zod";
 import Icons from "@/components/shared/icons";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Card2 from "@/components/myCard";
 import {
   Dialog,
   DialogContent,
@@ -71,34 +72,40 @@ export default function CreateProjectModal() {
       });
     }
   }
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      {/* Trigger for Dialog */}
       <DialogTrigger asChild>
-  <Card
-    role="button"
-    className="flex flex-col items-center justify-center gap-y-2.5 p-8 text-center hover:bg-accent"
-  >
-    <Button size="icon" variant="ghost">
-      <Icons.projectPlus className="h-8 w-8" />
-    </Button>
-    <p className="text-xl font-medium">Crie seu projeto</p>
-  </Card>
-</DialogTrigger>
+        <div className="flex justify-center">
+          <div className="relative w-[300px] lg:w-[300px] aspect-[4/3] rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 cursor-pointer hover:shadow-md transition-all">
+            {/* Inner Content */}
+            <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+              {/* Icon */}
+              <Icons.projectPlus className="h-10 w-10 text-primary" />
 
-      <DialogContent className="sm:max-w-[425px]">
+              {/* Title */}
+              <p className="text-xl font-bold text-muted-foreground">Crie seu projeto</p>
+            </div>
+          </div>
+        </div>
+      </DialogTrigger>
+
+      {/* Dialog Content */}
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Criar Projeto</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome</FormLabel>
+                  <FormLabel>Nome do Projeto</FormLabel>
                   <FormControl>
-                    <Input placeholder="XYZ" {...field} />
+                    <Input placeholder="Digite o nome do projeto" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,20 +118,15 @@ export default function CreateProjectModal() {
                 <FormItem>
                   <FormLabel>Domínio</FormLabel>
                   <FormControl>
-                    <Input placeholder="xyz.com" {...field} />
+                    <Input placeholder="exemplo.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <DialogFooter>
-              <Button disabled={form.formState.isSubmitting} type="submit">
-                {form.formState.isSubmitting && (
-                  <Icons.spinner className={"mr-2 h-5 w-5 animate-spin"} />
-                )}
-                Create
-              </Button>
-            </DialogFooter>
+            <Button type="submit" className="w-full">
+              Criar Projeto
+            </Button>
           </form>
         </Form>
       </DialogContent>

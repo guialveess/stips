@@ -119,7 +119,7 @@ export default async function PublicProjectPage({
       >
         <section className="flex h-full w-full flex-col items-center justify-center space-y-4 text-center">
           <h1 className="text-lg font-bold text-gray-800 dark:text-white md:text-xl">
-            {project.name}
+            {project.name}  
           </h1>
           <p className="text-amber-700 dark:text-amber-800-">
             <strong>Domain:</strong> {project.domain}
