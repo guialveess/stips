@@ -3,7 +3,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DeleteCard from "./delete-card";
 import EditableDetails from "./editable-details";
 
-export default function TabSections({ project }: { project: Project }) {
+export default function TabSections({
+  project,
+}: {
+  project: Project & { socialLinks: { name?: string; url: string }[] };
+}) {
   return (
     <Tabs defaultValue="details">
       <TabsList>
@@ -14,7 +18,8 @@ export default function TabSections({ project }: { project: Project }) {
         <EditableDetails
           initialValues={{
             ...project,
-            shareUrl: project.shareUrl || "", // Garante que `shareUrl` seja uma string
+            shareUrl: project.shareUrl || "",
+            socialLinks: project.socialLinks || [], // Garante que socialLinks seja uma lista
           }}
         />
       </TabsContent>

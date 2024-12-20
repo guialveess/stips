@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import * as z from "zod";
 import Icons from "@/components/shared/icons";
 import { Button } from "@/components/ui/button";
@@ -30,6 +30,14 @@ import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 export const projectSchema = z.object({
   name: z.string().min(1, { message: "Please enter a project name." }),
   domain: z.string().min(1, { message: "Please enter a project domain." }),
+  socialLinks: z
+    .array(
+      z.object({
+        name: z.string().optional(),
+        url: z.string().url({ message: "Please enter a valid URL." }),
+      })
+    )
+    .optional(),
 });
 
 export type ProjectFormValues = z.infer<typeof projectSchema>;
@@ -49,7 +57,13 @@ export default function CreateProjectModal() {
     defaultValues: {
       name: "",
       domain: "",
+      socialLinks: [{ name: "", url: "" }],
     },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "socialLinks",
   });
 
   async function onSubmit(values: ProjectFormValues) {
@@ -90,23 +104,19 @@ export default function CreateProjectModal() {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        {/* Trigger for Dialog */}
         <DialogTrigger asChild>
           <div className="flex justify-center">
             <div className="relative w-[300px] lg:w-[300px] aspect-[4/3] rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 cursor-pointer hover:shadow-md transition-all">
-              {/* Inner Content */}
               <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-                {/* Icon */}
                 <Icons.projectPlus className="h-10 w-10 text-primary" />
-
-                {/* Title */}
-                <p className="text-xl font-bold text-muted-foreground">Crie seu projeto</p>
+                <p className="text-xl font-bold text-muted-foreground">
+                  Crie seu projeto
+                </p>
               </div>
             </div>
           </div>
         </DialogTrigger>
 
-        {/* Dialog Content */}
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>Criar Projeto</DialogTitle>
@@ -139,6 +149,51 @@ export default function CreateProjectModal() {
                   </FormItem>
                 )}
               />
+              <div className="space-y-4">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Links Sociais (opcional)
+                </p>
+                {fields.map((item, index) => (
+                  <div key={item.id} className="flex gap-4 items-center">
+                    <FormField
+                      control={form.control}
+                      name={`socialLinks.${index}.name`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Nome</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Ex: Spotify" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`socialLinks.${index}.url`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>URL</FormLabel>
+                          <FormControl>
+                            <Input placeholder="https://exemplo.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      onClick={() => remove(index)}
+                    >
+                      Remover
+                    </Button>
+                  </div>
+                ))}
+                <Button type="button" onClick={() => append({ name: "", url: "" })}>
+                  Adicionar Link
+                </Button>
+              </div>
               <Button type="submit" className="w-full">
                 Criar Projeto
               </Button>
@@ -147,7 +202,6 @@ export default function CreateProjectModal() {
         </DialogContent>
       </Dialog>
 
-      {/* Multi-Step Loader */}
       {isLoading && (
         <MultiStepLoader
           loadingStates={loadingStates}

@@ -18,17 +18,34 @@ import { toast } from "@/hooks/use-toast";
 import { updateProjectById } from "../action";
 import { projectSchema, type ProjectFormValues } from "../create-project-modal";
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 export default function EditableDetails({
   initialValues,
 }: {
-  initialValues: ProjectFormValues & { id: string; shareUrl: string };
+  initialValues: ProjectFormValues & {
+    id: string;
+    shareUrl: string;
+    socialLinks: { name?: string; url: string }[];
+  };
 }) {
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
     values: initialValues,
   });
 
-  // Detecta o ambiente e define a URL base
+  const newLinkForm = useForm<{ name: string; url: string }>({
+    defaultValues: { name: "", url: "" },
+  });
+
   const baseUrl =
     process.env.NODE_ENV === "production"
       ? "https://boiderplatenext-01.vercel.app"
@@ -51,80 +68,179 @@ export default function EditableDetails({
     }
   }
 
+  async function addNewLink(data: { name: string; url: string }) {
+    try {
+      const updatedLinks = [
+        ...initialValues.socialLinks,
+        { name: data.name, url: data.url },
+      ];
+      await updateProjectById(initialValues.id, {
+        ...initialValues,
+        socialLinks: updatedLinks,
+      });
+      toast({
+        title: "Social link added successfully.",
+      });
+      newLinkForm.reset();
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error adding social link.",
+        description: "Please try again.",
+        variant: "destructive",
+      });
+    }
+  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-6">
-        {/* ID Field */}
-        <FormItem>
-          <FormLabel>ID</FormLabel>
-          <FormControl>
-            <div className="relative">
-              <Input value={initialValues.id} readOnly disabled />
-              <CopyButton content={initialValues.id} />
-            </div>
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-
-        {/* Name Field */}
+    <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-6">
+      {/* ID Field */}
+      <FormItem>
+        <FormLabel>ID</FormLabel>
+        <FormControl>
+          <div className="relative">
+            <Input value={initialValues.id} readOnly disabled />
+            <CopyButton content={initialValues.id} />
+          </div>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+  
+      {/* Name Field */}
+      <FormField
+        control={form.control}
+        name="name"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Nome</FormLabel>
+            <FormControl>
+              <Input placeholder="XYZ" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+  
+      {/* Domain Field */}
+      <FormField
+        control={form.control}
+        name="domain"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Domínio</FormLabel>
+            <FormControl>
+              <Input placeholder="xyz.com" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+  
+      {/* Public URL Field */}
+      <FormItem>
+        <FormLabel>URL Pública</FormLabel>
+        <FormControl>
+          <div className="relative">
+            <Input
+              value={`${baseUrl}/project/${initialValues.shareUrl}`}
+              readOnly
+              disabled
+            />
+            <CopyButton content={`${baseUrl}/project/${initialValues.shareUrl}`} />
+          </div>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+  
+      {/* Social Links */}
+      {initialValues.socialLinks?.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-lg font-medium">Redes Sociais</h2>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableCaption>Links das redes sociais associadas.</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Nome</TableHead>
+                  <TableHead>URL</TableHead>
+                  <TableHead>Ações</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {initialValues.socialLinks.map((link, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{link.name || "N/A"}</TableCell>
+                    <TableCell>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline"
+                      >
+                        {link.url}
+                      </a>
+                    </TableCell>
+                    <TableCell>
+                      <CopyButton content={link.url} />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      )}
+  
+      {/* Add New Social Link */}
+      <div className="mt-8 space-y-4">
+        <h3 className="text-lg font-medium">Adicionar Nova Rede Social</h3>
         <FormField
-          control={form.control}
+          control={newLinkForm.control}
           name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input placeholder="XYZ" {...field} />
+                <Input placeholder="Ex: Instagram" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        {/* Domain Field */}
         <FormField
-          control={form.control}
-          name="domain"
+          control={newLinkForm.control}
+          name="url"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Domínio</FormLabel>
+              <FormLabel>URL</FormLabel>
               <FormControl>
-                <Input placeholder="xyz.com" {...field} />
+                <Input placeholder="https://instagram.com/seulink" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        {/* Public URL Field */}
-        <FormItem>
-          <FormLabel>URL Pública</FormLabel>
-          <FormControl>
-            <div className="relative">
-              <Input
-                value={`${baseUrl}/project/${initialValues.shareUrl}`}
-                readOnly
-                disabled
-              />
-              <CopyButton
-                content={`${baseUrl}/project/${initialValues.shareUrl}`}
-              />
-            </div>
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-
-        {/* Submit Button */}
         <Button
-          disabled={form.formState.isSubmitting || !form.formState.isDirty}
-          type="submit"
+          onClick={newLinkForm.handleSubmit(addNewLink)}
+          className="w-full"
+          type="button"
         >
-          {form.formState.isSubmitting && (
-            <Icons.spinner className={"mr-2 h-5 w-5 animate-spin"} />
-          )}
-          Salvar
+          Adicionar
         </Button>
-      </form>
-    </Form>
+      </div>
+  
+      {/* Submit Button */}
+      <Button
+        disabled={form.formState.isSubmitting || !form.formState.isDirty}
+        type="submit"
+      >
+        {form.formState.isSubmitting && (
+          <Icons.spinner className={"mr-2 h-5 w-5 animate-spin"} />
+        )}
+        Salvar
+      </Button>
+    </form>
+  </Form>
   );
 }

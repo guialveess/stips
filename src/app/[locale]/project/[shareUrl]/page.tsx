@@ -4,6 +4,7 @@ import GridPattern from "@/components/ui/grid-pattern";
 import { Spotlight } from "@/components/Spotlight";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import Card_05 from "@/components/Card_05";
 
 export default async function PublicProjectPage({
   params,
@@ -55,7 +56,7 @@ export default async function PublicProjectPage({
     <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden">
       {/* GridPattern cobrindo toda a tela */}
       <div className="absolute inset-0">
-        <GridPattern
+      <GridPattern
           squares={[
             // Letra S
             [1, 1],
@@ -154,7 +155,7 @@ export default async function PublicProjectPage({
           alt={`${project.user.name}'s avatar`}
           width={50}
           height={50}
-          className="object-cover !m-0 !p-0 object-top rounded-full h-14 w-14 border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
+          className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
         />
         <Badge className="text-sm font-medium text-white dark:text-black">
           <span>🎉</span>
@@ -171,9 +172,16 @@ export default async function PublicProjectPage({
           <h1 className="text-lg font-bold text-gray-800 dark:text-white md:text-xl">
             {project.name}
           </h1>
-          <p className="dark:text-amber-800- text-amber-700">
-            <strong>Domain:</strong> {project.domain}
-          </p>
+
+          {/* Redes Sociais */}
+          <Card_05
+            title="Plataformas Conectadas"
+            category="Social Links"
+            socialLinks={project.socialLinks?.map((link) => ({
+              name: link.name ?? "Rede Social",
+              url: link.url,
+            }))}
+          />
         </section>
       </BrowserComponent>
     </div>

@@ -11,21 +11,27 @@ import { getCurrentSession } from "@/lib/server/session";
 interface Payload {
   name: string;
   domain: string;
+  socialLinks?: { name?: string; url: string }[];
 }
 
 export async function createProject(payload: Payload) {
   const { user } = await getCurrentSession();
 
-  const shareUrl = nanoid(); // Gera um identificador único para o URL público
+  const shareUrl = nanoid();
 
   const project = await prisma.project.create({
     data: {
-      ...payload,
+      name: payload.name,
+      domain: payload.domain,
       shareUrl,
       user: {
-        connect: {
-          id: user?.id,
-        },  
+        connect: { id: user?.id },
+      },
+      socialLinks: {
+        create: payload.socialLinks?.map((link) => ({
+          name: link.name ?? undefined, // Use undefined para campos opcionais
+          url: link.url,
+        })),
       },
     },
   });
@@ -33,6 +39,7 @@ export async function createProject(payload: Payload) {
   revalidatePath(`/dashboard/projects`);
   return project;
 }
+
 
 export async function checkIfFreePlanLimitReached() {
   const { user } = await getCurrentSession();
@@ -64,17 +71,21 @@ export async function getProjects() {
   return projects as Project[];
 }
 
-export async function getProjectById(id: string | undefined) {
-  if (!id) {
-    throw new Error("ID do projeto não foi fornecido.");
-  }
-
+export async function getProjectById(id: string) {
   const project = await prisma.project.findUnique({
     where: { id },
+    include: {
+      socialLinks: true, // Inclui os links sociais relacionados
+    },
   });
+
+  if (!project) {
+    throw new Error("Projeto não encontrado.");
+  }
 
   return project;
 }
+
 
 export async function updateProjectById(id: string, payload: Payload) {
   const { user } = await getCurrentSession();
@@ -83,7 +94,16 @@ export async function updateProjectById(id: string, payload: Payload) {
       id,
       userId: user?.id,
     },
-    data: payload,
+    data: {
+      ...payload,
+      socialLinks: {
+        deleteMany: {}, // Remove links existentes
+        create: payload.socialLinks?.map((link) => ({
+          name: link.name || null,
+          url: link.url,
+        })),
+      },
+    },
   });
   revalidatePath(`/dashboard/projects`);
 }
@@ -100,6 +120,7 @@ export async function getProjectByShareUrl(shareUrl: string) {
           picture: true,
         },
       },
+      socialLinks: true, // Inclui os links sociais relacionados
     },
   });
 
@@ -110,14 +131,56 @@ export async function getProjectByShareUrl(shareUrl: string) {
   return project;
 }
 
+
 export async function deleteProjectById(id: string) {
-  const { user } = await getCurrentSession();
-  await prisma.project.delete({
-    where: {
-      id,
-      userId: user?.id,
-    },
-  });
-  revalidatePath(`/dashboard/projects`);
-  redirect("/dashboard/projects");
+  if (!id) {
+    console.error("deleteProjectById: ID do projeto não foi fornecido.");
+    throw new Error("Invalid project ID.");
+  }
+
+  try {
+    const { user } = await getCurrentSession();
+
+    if (!user?.id) {
+      console.error("deleteProjectById: Usuário não autenticado.");
+      throw new Error("Unauthorized: User not logged in");
+    }
+
+    // Verifica se o projeto pertence ao usuário antes de excluir
+    const project = await prisma.project.findFirst({
+      where: {
+        id,
+        userId: user.id,
+      },
+    });
+
+    if (!project) {
+      console.error("deleteProjectById: Projeto não encontrado ou usuário não autorizado.");
+      throw new Error("Project not found or unauthorized.");
+    }
+
+    // Exclui os links sociais associados ao projeto
+    await prisma.socialLink.deleteMany({
+      where: {
+        projectId: id,
+      },
+    });
+
+    // Exclui o projeto
+    await prisma.project.delete({
+      where: { id },
+    });
+
+    // Revalida o caminho antes de redirecionar
+    revalidatePath(`/dashboard/projects`);
+    console.log("Revalidation completed. Redirecting...");
+
+    // Redireciona para a página de projetos
+    redirect("/dashboard/projects");
+  } catch (error) {
+    console.error("Error deleting project:", error);
+
+    // Re-lança o erro apenas se necessário
+    throw new Error("Failed to delete project.");
+  }
 }
