@@ -12,6 +12,9 @@ const withSerwist = withSerwistInit({
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  images: {
+    domains: ['utfs.io'], // Configuração correta para domínios permitidos
+  },
   redirects: async () => {
     return [
       {
@@ -25,6 +28,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-}
+};
 
 export default withSerwist(nextConfig);

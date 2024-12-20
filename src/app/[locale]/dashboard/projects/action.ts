@@ -93,6 +93,14 @@ export async function getProjectByShareUrl(shareUrl: string) {
 
   const project = await prisma.project.findUnique({
     where: { shareUrl },
+    include: {
+      user: {
+        select: {
+          name: true,
+          picture: true,
+        },
+      },
+    },
   });
 
   if (!project) {

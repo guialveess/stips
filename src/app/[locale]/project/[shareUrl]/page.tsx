@@ -2,6 +2,8 @@ import { getProjectByShareUrl } from "@/app/[locale]/dashboard/projects/action";
 import { BrowserComponent } from "@/components/mock-browser";
 import GridPattern from "@/components/ui/grid-pattern";
 import { Spotlight } from "@/components/Spotlight";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 export default async function PublicProjectPage({
   params,
@@ -22,6 +24,18 @@ export default async function PublicProjectPage({
         </div>
       </div>
     );
+  }
+
+  function getRandomEmoji() {
+    const emojis = [
+      '🎉', '🔥', '🚀', '🌟', '🎈', '💎', '✨', '🍀', '🎵', '🌈',
+      '🦄', '💡', '🌍', '🎨', '🎁', '🥳', '👾', '⚡', '🍕', '☕',
+      '📚', '🛠️', '🌌', '🌅', '🌻', '🧩', '🎯', '🕹️', '🪐', '💌',
+      '🌞', '🌙', '🖼️', '🎮', '🎤', '🪄', '🌊', '🎷', '🎹', '📱',
+      '🖋️', '🖊️', '💻', '🍎', '🍩', '🍫', '🎶', '🎟️', '📸', '🎬'
+    ];
+    const randomIndex = Math.floor(Math.random() * emojis.length);
+    return emojis[randomIndex];
   }
 
   const project = await getProjectByShareUrl(shareUrl);
@@ -145,6 +159,20 @@ export default async function PublicProjectPage({
         className="absolute -top-40 left-0 md:-top-20 md:left-20"
         fill="black"
       />
+
+      <div className="absolute top-10 flex flex-col items-center space-y-2">
+        <Image
+          src={project.user.picture || "/placeholder-avatar.png"}
+          alt={`${project.user.name}'s avatar`}
+          width={50}
+          height={50}
+          className="object-cover !m-0 !p-0 object-top rounded-full h-14 w-14 border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
+        />
+        <Badge className="text-sm font-medium text-white dark:text-black">
+          <span>🎉</span>
+          {project.user.name}
+        </Badge>
+      </div>
 
       {/* Browser Component */}
       <BrowserComponent

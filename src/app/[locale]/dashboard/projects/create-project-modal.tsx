@@ -6,12 +6,9 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Icons from "@/components/shared/icons";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import Card2 from "@/components/myCard";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -28,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { FreePlanLimitError } from "@/lib/utils";
 import { checkIfFreePlanLimitReached, createProject } from "./action";
+import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 
 export const projectSchema = z.object({
   name: z.string().min(1, { message: "Please enter a project name." }),
@@ -36,8 +34,16 @@ export const projectSchema = z.object({
 
 export type ProjectFormValues = z.infer<typeof projectSchema>;
 
+const loadingStates = [
+  { text: "Criando projeto..." },
+  { text: "Validando os tipos..." },
+  { text: "Preparando o ambiente..." },
+  { text: "Projeto pronto para uso!" },
+];
+
 export default function CreateProjectModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
@@ -48,18 +54,26 @@ export default function CreateProjectModal() {
 
   async function onSubmit(values: ProjectFormValues) {
     try {
+      setIsOpen(false); // Fecha o Dialog imediatamente
+      setIsLoading(true); // Ativa o loader
+
       const limitReached = await checkIfFreePlanLimitReached();
       if (limitReached) {
         throw new FreePlanLimitError();
       }
       await createProject(values);
-      toast({
-        title: "Projeto criado com sucesso.",
-      });
-      form.reset();
-      setIsOpen(false);
+
+      setTimeout(() => {
+        toast({
+          title: "Projeto criado com sucesso.",
+        });
+        form.reset();
+        setIsLoading(false); // Desativa o loader
+      }, loadingStates.length * 1500); // Duração baseada no número de etapas
     } catch (error) {
       console.log(error);
+      setIsLoading(false); // Desativa o loader em caso de erro
+
       if (error instanceof FreePlanLimitError) {
         return toast({
           title: "Limite do plano gratuito atingido. Atualize seu plano.",
@@ -74,62 +88,73 @@ export default function CreateProjectModal() {
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      {/* Trigger for Dialog */}
-      <DialogTrigger asChild>
-        <div className="flex justify-center">
-          <div className="relative w-[300px] lg:w-[300px] aspect-[4/3] rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 cursor-pointer hover:shadow-md transition-all">
-            {/* Inner Content */}
-            <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-              {/* Icon */}
-              <Icons.projectPlus className="h-10 w-10 text-primary" />
+    <>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        {/* Trigger for Dialog */}
+        <DialogTrigger asChild>
+          <div className="flex justify-center">
+            <div className="relative w-[300px] lg:w-[300px] aspect-[4/3] rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 cursor-pointer hover:shadow-md transition-all">
+              {/* Inner Content */}
+              <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+                {/* Icon */}
+                <Icons.projectPlus className="h-10 w-10 text-primary" />
 
-              {/* Title */}
-              <p className="text-xl font-bold text-muted-foreground">Crie seu projeto</p>
+                {/* Title */}
+                <p className="text-xl font-bold text-muted-foreground">Crie seu projeto</p>
+              </div>
             </div>
           </div>
-        </div>
-      </DialogTrigger>
+        </DialogTrigger>
 
-      {/* Dialog Content */}
-      <DialogContent className="sm:max-w-[500px]">
-        <DialogHeader>
-          <DialogTitle>Criar Projeto</DialogTitle>
-        </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nome do Projeto</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Digite o nome do projeto" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="domain"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Domínio</FormLabel>
-                  <FormControl>
-                    <Input placeholder="exemplo.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full">
-              Criar Projeto
-            </Button>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+        {/* Dialog Content */}
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Criar Projeto</DialogTitle>
+          </DialogHeader>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nome do Projeto</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Digite o nome do projeto" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="domain"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Domínio</FormLabel>
+                    <FormControl>
+                      <Input placeholder="exemplo.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full">
+                Criar Projeto
+              </Button>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Multi-Step Loader */}
+      {isLoading && (
+        <MultiStepLoader
+          loadingStates={loadingStates}
+          loading={isLoading}
+          duration={1500}
+        />
+      )}
+    </>
   );
 }

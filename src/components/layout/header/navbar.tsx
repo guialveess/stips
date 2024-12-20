@@ -35,8 +35,7 @@ export default function Navbar({
     <>
       {/* Navbar */}
       <nav className="flex h-full items-center justify-between">
-        <div className="hidden items-center gap-12 lg:flex 2xl:gap-16">
-        </div>
+        <div className="hidden items-center gap-12 lg:flex 2xl:gap-16"></div>
         <Sheet open={isModalOpen} onOpenChange={setIsModalOpen}>
           <SheetTrigger className="lg:hidden">
             <span className="sr-only">Abrir Menu</span>
@@ -58,13 +57,15 @@ export default function Navbar({
                 >
                   {headerText.inicio}
                 </Link>
-                <Link
-                  href="/dashboard/billing"
-                  className="block font-semibold hover:underline hover:underline-offset-4"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  {headerText.payment}
-                </Link>
+                {session && (
+                  <Link
+                    href="/dashboard/billing"
+                    className="block font-semibold hover:underline hover:underline-offset-4"
+                    onClick={() => setIsModalOpen(false)}
+                  >
+                    {headerText.payment}
+                  </Link>
+                )}
                 {session ? (
                   <>
                     <Link
@@ -106,7 +107,6 @@ export default function Navbar({
         )}
       >
         {/* Substitua pelo conteúdo da sua página */}
-        
       </div>
     </>
   );
