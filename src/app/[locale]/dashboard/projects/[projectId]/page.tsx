@@ -9,7 +9,7 @@ export default async function SingleProject({
   params: Promise<{ projectId: string }>;
 }) {
   console.log("Resolving params...");
-  const params = await rawParams; // Aguarda a resolução de params
+  const params = await rawParams;
   const { projectId } = params;
   console.log("Resolved params:", params);
 
@@ -24,6 +24,15 @@ export default async function SingleProject({
       </div>
     );
   }
+
+  // Transformar socialLinks
+  const transformedProject = {
+    ...project,
+    socialLinks: project.socialLinks.map((link) => ({
+      name: link.name ?? undefined, // Converte null para undefined
+      url: link.url,
+    })),
+  };
 
   const navItems = [
     {
@@ -49,7 +58,7 @@ export default async function SingleProject({
     <div className="flex items-center justify-center min-h-56">
       <div className="w-full max-w-4xl">
         <FloatingNav navItems={navItems} />
-        <TabSections project={project} />
+        <TabSections project={transformedProject} />
       </div>
     </div>
   );
