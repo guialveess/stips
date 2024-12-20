@@ -47,7 +47,7 @@ export default async function PublicProjectPage({
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL ||
     (process.env.NODE_ENV === "production"
-      ? "https://boiderplatenext-01.vercel.app"
+      ? "https://stipss.vercel.app"
       : "http://localhost:3000");
 
   const publicUrl = `${baseUrl}/project/${shareUrl}`;

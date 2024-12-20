@@ -48,7 +48,7 @@ export default function EditableDetails({
 
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? "https://boiderplatenext-01.vercel.app"
+      ? "https://stipss.vercel.app"
       : "http://localhost:3000";
 
   async function onSubmit(values: ProjectFormValues) {
