@@ -26,18 +26,6 @@ export default async function PublicProjectPage({
     );
   }
 
-  function getRandomEmoji() {
-    const emojis = [
-      '🎉', '🔥', '🚀', '🌟', '🎈', '💎', '✨', '🍀', '🎵', '🌈',
-      '🦄', '💡', '🌍', '🎨', '🎁', '🥳', '👾', '⚡', '🍕', '☕',
-      '📚', '🛠️', '🌌', '🌅', '🌻', '🧩', '🎯', '🕹️', '🪐', '💌',
-      '🌞', '🌙', '🖼️', '🎮', '🎤', '🪄', '🌊', '🎷', '🎹', '📱',
-      '🖋️', '🖊️', '💻', '🍎', '🍩', '🍫', '🎶', '🎟️', '📸', '🎬'
-    ];
-    const randomIndex = Math.floor(Math.random() * emojis.length);
-    return emojis[randomIndex];
-  }
-
   const project = await getProjectByShareUrl(shareUrl);
 
   if (!project) {
