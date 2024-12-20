@@ -45,9 +45,12 @@ export default function Card_05({
             >
               {/* Container dos textos */}
               <div className="flex flex-col items-start">
-                <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                <Badge className="flex items-center gap-1.5 px-2 rounded-full
+                    bg-amber-50 dark:bg-amber-900/30
+                    text-amber-600 dark:text-amber-400
+                    text-xs font-medium">
                   {link.name || "Rede Social"}
-                </p>
+                </Badge>
                 <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
                   {link.url}
                 </p>

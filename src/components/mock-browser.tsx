@@ -7,13 +7,30 @@ export const BrowserComponent: React.FC<{
 }> = ({ className, children, shareUrl }) => (
   <div
     className={cn(
-      "relative w-full rounded-xl border bg-white text-sm text-neutral-950 shadow-2xl shadow-gray-300 dots-gray-300 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400 dark:shadow-lg dark:dots-neutral-800",
+      "relative w-full rounded-xl border bg-white text-sm text-neutral-950 shadow-2xl shadow-gray-300 dots-gray-300 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400 dark:shadow-lg dark:dots-neutral-800 group", // Adicione `group` para o hover
       className
     )}
     style={{
       minHeight: "550px", // Altura mínima
     }}
   >
+    {/* Hover Effect */}
+    <div
+      className="absolute inset-0 rounded-2xl duration-1000 opacity-0 group-hover:opacity-100 pointer-events-none"
+    >
+      <div
+        className="absolute inset-0 dark:opacity-0
+          bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]
+          from-blue-100/20 via-white/0 to-white/0"
+      />
+      <div
+        className="absolute inset-0 opacity-0 dark:opacity-100
+          bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]
+          from-blue-900/20 via-zinc-900/0 to-zinc-900/0"
+      />
+    </div>
+
+    {/* Browser Header */}
     <div
       className={
         "flex w-full items-center justify-between gap-3 rounded-t-lg border-b border-inherit bg-inherit px-6 py-3"
@@ -25,7 +42,7 @@ export const BrowserComponent: React.FC<{
           className={"h-4 w-4 rounded-full bg-neutral-500 dark:bg-neutral-800"}
         />
         <div
-          className={"h-4 w-4 rounded-full bg-green-500 dark:bg-neutral-800"}
+          className={"h-4 w-4 rounded-full bg-green-500 dark:bg-green-500"}
         />
       </div>
       <div
@@ -54,6 +71,8 @@ export const BrowserComponent: React.FC<{
       </div>
       <div />
     </div>
+
+    {/* Content */}
     <div className={"absolute left-0 top-0 w-full px-4 pt-16"}>
       <div className="flex min-h-[600px] flex-col justify-start">
         {children}

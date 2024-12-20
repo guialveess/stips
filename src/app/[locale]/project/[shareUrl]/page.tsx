@@ -157,10 +157,10 @@ export default async function PublicProjectPage({
           height={50}
           className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
         />
-        <Badge className="mb-6 text-sm font-medium text-white dark:text-black">
+        {/* <Badge className="mb-6 text-sm font-medium text-white dark:text-black">
           <span>🎉</span>
           {project.user.name}
-        </Badge>
+        </Badge> */}
       </div>
 
       {/* Browser Component */}
@@ -169,9 +169,10 @@ export default async function PublicProjectPage({
         shareUrl={publicUrl}
       >
         <section className="flex h-full w-full flex-col items-center justify-center space-y-4 text-center">
-          <h1 className="text-lg font-bold text-gray-800 dark:text-white md:text-xl">
-            {project.name}
-          </h1>
+        <Badge className="mt-4   text-sm font-medium text-white dark:text-black">
+          <span>🎉</span>
+          {project.user.name}
+        </Badge>
 
           {/* Redes Sociais */}
           <Card_05
