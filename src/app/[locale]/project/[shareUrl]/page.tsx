@@ -56,7 +56,7 @@ export default async function PublicProjectPage({
     <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden">
       {/* GridPattern cobrindo toda a tela */}
       <div className="absolute inset-0">
-      <GridPattern
+        <GridPattern
           squares={[
             // Letra S
             [1, 1],
@@ -157,7 +157,7 @@ export default async function PublicProjectPage({
           height={50}
           className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
         />
-        <Badge className="text-sm font-medium text-white dark:text-black">
+        <Badge className="mb-6 text-sm font-medium text-white dark:text-black">
           <span>🎉</span>
           {project.user.name}
         </Badge>
@@ -165,7 +165,7 @@ export default async function PublicProjectPage({
 
       {/* Browser Component */}
       <BrowserComponent
-        className="relative z-10 h-[300px] w-full max-w-[600px]"
+        className="relative z-10 h-[300px] w-full max-w-[600px] mt-14"
         shareUrl={publicUrl}
       >
         <section className="flex h-full w-full flex-col items-center justify-center space-y-4 text-center">
