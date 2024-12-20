@@ -11,7 +11,7 @@ export const BrowserComponent: React.FC<{
       className
     )}
     style={{
-      minHeight: "500px", // Altura mínima
+      minHeight: "550px", // Altura mínima
     }}
   >
     <div

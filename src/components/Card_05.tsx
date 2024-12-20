@@ -40,29 +40,29 @@ export default function Card_05({
         {socialLinks.length > 0 ? (
           socialLinks.map((link, index) => (
             <div
-  key={index}
-  className="flex justify-between rounded-xl border border-zinc-200/50 bg-zinc-50 p-4 transition-all hover:border-zinc-300/50 dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:hover:border-zinc-700/50"
->
-  {/* Container dos textos */}
-  <div className="flex flex-col items-start">
-    <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-      {link.name || "Rede Social"}
-    </p>
-    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-      {link.url}
-    </p>
-  </div>
-  
-  {/* Ícone de link */}
-  <a
-    href={link.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-orange-600 hover:underline ml-4 self-start"
-  >
-    <ArrowUpRight className="h-4 w-4" />
-  </a>
-</div>
+              key={index}
+              className="flex justify-between rounded-xl border border-zinc-200/50 bg-zinc-50 p-4 transition-all hover:border-zinc-300/50 dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:hover:border-zinc-700/50"
+            >
+              {/* Container dos textos */}
+              <div className="flex flex-col items-start">
+                <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                  {link.name || "Rede Social"}
+                </p>
+                <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                  {link.url}
+                </p>
+              </div>
+
+              {/* Ícone de link */}
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-4 self-start text-orange-600 hover:underline"
+              >
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
           ))
         ) : (
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
