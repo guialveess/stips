@@ -1,3 +1,5 @@
-// Internacionalização no servidor removida
 export const getI18n = () => ({ t: (key: string) => key }); // Placeholder simples
-export const getCurrentLocale = () => "en"; // Idioma fixo
+export const getScopedI18n = (scope: string) => {
+  return async (key: string) => `${scope}.${key}`; // Retorna uma string formatada
+};
+export const getCurrentLocale = () => "pt"; // Idioma fixo
