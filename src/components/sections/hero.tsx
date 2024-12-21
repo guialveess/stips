@@ -5,7 +5,6 @@ import Icons from "@/components/shared/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { nFormatter } from "@/lib/utils";
 import { FlipWords } from "@/components/ui/flip-words";
-import { getScopedI18n } from "@/locales/server";
 import { Badge } from "../ui/badge";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
@@ -20,7 +19,6 @@ interface SendingButtonProps {
 }
 
 export default async function Hero() {
-  const scopedT = await getScopedI18n("hero");
   const words = `Gerencie, crie e conduza seus objetivos com Stips`;
   const { stargazers_count: stars } = await fetch(
     "https://api.github.com/repos/moinulmoin/chadnext",
@@ -49,10 +47,8 @@ export default async function Hero() {
 
           <div className="justify-center text-center"></div>
           <div className="mx-auto mt-6 flex items-center justify-center space-x-5">
-      <SendingButton href="/login">
-        {scopedT("firstButton")}
-      </SendingButton>
-    </div>
+            <SendingButton href="/pt/login">Acessar</SendingButton>
+          </div>
         </div>
         <div className="w-full">
           <div className="flex w-full flex-wrap items-center justify-center gap-x-20 gap-y-10">

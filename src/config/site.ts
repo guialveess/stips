@@ -3,7 +3,7 @@ export const siteUrl =
 
 export const siteConfig = (locale?: string) => ({
   name: "Stips",
-  url: siteUrl + "/" + locale,
+  url: siteUrl + "/pt" + locale,
   ogImage: `${siteUrl}/${locale}/opengraph-image`,
   description: "Auth Boiderplate by Guilherme Alves",
   links: {

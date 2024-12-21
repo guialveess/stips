@@ -1,7 +1,3 @@
-import { createI18nServer } from "next-international/server";
-
-export const { getI18n, getScopedI18n, getStaticParams, getCurrentLocale } =
-  createI18nServer({
-    en: () => import("./en"),
-    fr: () => import("./fr"),
-  });
+// Internacionalização no servidor removida
+export const getI18n = () => ({ t: (key: string) => key }); // Placeholder simples
+export const getCurrentLocale = () => "en"; // Idioma fixo

@@ -1,17 +1,10 @@
 import { type Metadata } from "next";
 import { siteConfig, siteUrl } from "@/config/site";
 
-type Props = {
-  params: { locale: string };
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = siteConfig("pt"); // Defina o idioma fixo, por exemplo, "en" ou "pt".
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Aguarde explicitamente `params` antes de usá-lo
-  const { locale } = await Promise.resolve(params);
-
-  const site = siteConfig(locale);
-
-  const siteOgImage = `${siteUrl}/api/og?locale=${locale}`;
+  const siteOgImage = `${siteUrl}/api/og`;
 
   return {
     title: {
@@ -28,7 +21,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "Tailwind",
       "Radix UI",
       "Stripe",
-      "Internationalization",
       "Postgres",
     ],
     authors: [
@@ -40,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     creator: "Guilherme Alves",
     openGraph: {
       type: "website",
-      locale: locale,
+      locale: "en", // Defina o idioma fixo.
       url: site.url,
       title: site.name,
       description: site.description,
@@ -70,10 +62,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(site.url),
     alternates: {
       canonical: "/",
-      languages: {
-        en: "/en",
-        fr: "/fr",
-      },
     },
     appleWebApp: {
       capable: true,

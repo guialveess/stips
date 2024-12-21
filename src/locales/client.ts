@@ -1,13 +1,6 @@
+// Não há mais necessidade de criar o cliente
 "use client";
-import { createI18nClient } from "next-international/client";
 
-export const {
-  useI18n,
-  useScopedI18n,
-  I18nProviderClient,
-  useCurrentLocale,
-  useChangeLocale,
-} = createI18nClient({
-  en: () => import("./en"),
-  fr: () => import("./fr"),
-});
+// Remova qualquer referência ao createI18nClient
+export const useI18n = () => ({ t: (key: string) => key }); // Placeholder simples
+export const useCurrentLocale = () => "en"; // Fixo ou configure como preferir
