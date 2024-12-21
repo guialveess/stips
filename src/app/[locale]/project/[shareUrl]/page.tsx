@@ -150,17 +150,29 @@ export default async function PublicProjectPage({
       />
 
       <div className="absolute top-10 flex flex-col items-center space-y-2">
-        <Image
-          src={project.user.picture || "/placeholder-avatar.png"}
-          alt={`${project.user.name}'s avatar`}
-          width={50}
-          height={50}
-          className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
-        />
-        {/* <Badge className="mb-6 text-sm font-medium text-white dark:text-black">
-          <span>🎉</span>
-          {project.user.name}
-        </Badge> */}
+        {/* Contêiner principal do avatar com o gorro */}
+        <div className="group relative">
+          {/* Gorro Natalino */}
+          <Image
+            src="/santa-hat.png"
+            alt="Gorro Natalino"
+            width={25}
+            height={25}
+            className="absolute -top-3.5 left-6 z-20 h-10 w-10"
+          />
+          {/* Contêiner para o efeito de pulsação na borda */}
+          <div className="relative h-16 w-16 rounded-full p-[3px]">
+            <div className="from-color-1 via-color-2 to-color-3 absolute inset-0 animate-pulse rounded-full bg-gradient-to-r shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+            {/* Avatar */}
+            <Image
+              src={project.user.picture || "/placeholder-avatar.png"}
+              alt={`${project.user.name}'s avatar`}
+              width={50}
+              height={50}
+              className="relative z-10 h-full w-full rounded-full bg-white object-cover"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Browser Component */}
