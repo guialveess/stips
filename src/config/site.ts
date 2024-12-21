@@ -5,7 +5,7 @@ export const siteConfig = (locale?: string) => ({
   name: "Stips",
   url: siteUrl + "/pt" + locale,
   ogImage: `${siteUrl}/${locale}/opengraph-image`,
-  description: "Auth Boiderplate by Guilherme Alves",
+  description: "Links que vão além do clique - guiialves",
   links: {
     portifolio: "https://guiialves.vercel.app/",
     github: "https://github.com/guialveess",
