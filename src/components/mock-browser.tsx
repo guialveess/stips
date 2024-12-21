@@ -8,6 +8,7 @@ export const BrowserComponent: React.FC<{
   <div
     className={cn(
       "relative w-full rounded-xl border bg-white text-sm text-neutral-950 shadow-2xl shadow-gray-300 dots-gray-300 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400 dark:shadow-lg dark:dots-neutral-800 group", // Adicione `group` para o hover
+      "mt-10", // Adicione espaço superior para evitar sobreposição
       className
     )}
     style={{
