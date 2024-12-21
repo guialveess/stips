@@ -7,7 +7,7 @@ export default function GoBack() {
   const router = useRouter();
   return (
     <Button
-      className="mb-5"
+      className="mb-14 bg-transparent"
       size="icon"
       variant="secondary"
       onClick={() => router.back()}

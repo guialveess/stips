@@ -35,22 +35,22 @@ export default async function Projects() {
   return (
     <div className="relative min-h-screen bg-background">
       {/* Flickering Grid Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none z-0">
-        <div className="relative size-[600px] rounded-s-large w-full bg-background overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-30">
+        <div className="relative size-[600px] w-full overflow-hidden rounded-s-large bg-background">
           <FlickeringGrid
-            className="z-0 relative inset-0 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+            className="relative inset-0 z-0 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
             squareSize={6}
             gridGap={6}
             color="#60A5FA"
             maxOpacity={0.5}
             flickerChance={0.1}
-           
           />
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="relative grid gap-6 p-4 md:grid-cols-3 lg:grid-cols-4 z-10">
+      {/* Main Content */}
+      <div className="relative z-10 mt-20 grid gap-6 p-4 md:grid-cols-3 lg:grid-cols-4">
         <CreateProjectModal />
 
         {projects.map((project) => (

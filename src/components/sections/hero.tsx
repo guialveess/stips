@@ -11,6 +11,7 @@ import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { HoverBorderGradient } from "../ui/hover-border-gradient";
 import FlickeringGrid from "@/components/ui/flickering-grid";
 import { SendingButton } from "../SendingButton";
+import WaitingList from "@/components/WaitingList";
 
 interface SendingButtonProps {
   href: string;
@@ -28,7 +29,7 @@ export default async function Hero() {
   ).then((res) => res.json());
 
   return (
-    <section className="flex h-screen items-center justify-center">
+    <section className="flex h-screen items-center justify-center overflow-hidden">
       <div className="container flex w-full flex-col items-center justify-center space-y-20 py-16 md:py-20 lg:py-24 xl:py-28">
         <div className="mx-auto w-full max-w-2xl text-center">
           <div className="mx-auto mb-5 flex max-w-fit items-center justify-center">
@@ -51,8 +52,8 @@ export default async function Hero() {
           </div>
         </div>
         <div className="w-full">
-          <div className="flex w-full flex-wrap items-center justify-center gap-x-20 gap-y-10">
-            {/* Conteúdo futuro aqui */}
+          <div className="flex w-full flex-wrap items-center justify-center gap-4 px-4">
+            <WaitingList />
           </div>
         </div>
       </div>

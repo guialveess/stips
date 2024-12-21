@@ -9,24 +9,26 @@ export default function TabSections({
   project: Project & { socialLinks: { name?: string; url: string }[] };
 }) {
   return (
-    <Tabs defaultValue="details">
-      <TabsList>
-        <TabsTrigger value="details">Detalhes</TabsTrigger>
-        <TabsTrigger value="settings">Configurações</TabsTrigger>
-      </TabsList>
-      <TabsContent value="details">
-        <EditableDetails
-          initialValues={{
-            ...project,
-            shareUrl: project.shareUrl || "",
-            socialLinks: project.socialLinks || [], // Garante que socialLinks seja uma lista
-          }}
-        />
-      </TabsContent>
+    <div className="mt-8"> {/* Adicionada margin-top */}
+      <Tabs defaultValue="details">
+        <TabsList>
+          <TabsTrigger value="details">Detalhes</TabsTrigger>
+          <TabsTrigger value="settings">Configurações</TabsTrigger>
+        </TabsList>
+        <TabsContent value="details">
+          <EditableDetails
+            initialValues={{
+              ...project,
+              shareUrl: project.shareUrl || "",
+              socialLinks: project.socialLinks || [], // Garante que socialLinks seja uma lista
+            }}
+          />
+        </TabsContent>
 
-      <TabsContent value="settings">
-        <DeleteCard id={project.id} />
-      </TabsContent>
-    </Tabs>
+        <TabsContent value="settings">
+          <DeleteCard id={project.id} />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }
