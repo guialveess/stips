@@ -165,15 +165,14 @@ export default async function PublicProjectPage({
 
       {/* Browser Component */}
       <BrowserComponent
-  className="relative z-10 h-[300px] w-full max-w-[600px] mt-28 sm:mt-32 lg:mt-14"
-  shareUrl={publicUrl}
->
-
+        className="relative z-10 mt-40 h-[300px] w-full max-w-[600px] sm:mt-32 lg:mt-14"
+        shareUrl={publicUrl}
+      >
         <section className="flex h-full w-full flex-col items-center justify-center space-y-4 text-center">
-        <Badge className="mt-4   text-sm font-medium text-white dark:text-black">
-          <span>🎉</span>
-          {project.user.name}
-        </Badge>
+          <Badge className="mt-4 text-sm font-medium text-white dark:text-black">
+            <span>🎉</span>
+            {project.user.name}
+          </Badge>
 
           {/* Redes Sociais */}
           <Card_05
