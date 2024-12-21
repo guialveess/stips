@@ -1,26 +1,13 @@
 import Link from "next/link";
-import { RocketIcon } from "lucide-react";
-import { BrandIcons } from "@/components/shared/brand-icons";
-import Icons from "@/components/shared/icons";
-import { buttonVariants } from "@/components/ui/button";
-import { nFormatter } from "@/lib/utils";
-import { FlipWords } from "@/components/ui/flip-words";
-import { Badge } from "../ui/badge";
-import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
-import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { HoverBorderGradient } from "../ui/hover-border-gradient";
-import FlickeringGrid from "@/components/ui/flickering-grid";
+import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { SendingButton } from "../SendingButton";
 import WaitingList from "@/components/WaitingList";
-
-interface SendingButtonProps {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-}
+import PricingPlans from "../PricingTier";
 
 export default async function Hero() {
   const words = `Gerencie, crie e conduza seus objetivos com Stips`;
+
   const { stargazers_count: stars } = await fetch(
     "https://api.github.com/repos/moinulmoin/chadnext",
     {
@@ -29,9 +16,11 @@ export default async function Hero() {
   ).then((res) => res.json());
 
   return (
-    <section className="flex h-screen items-center justify-center overflow-hidden">
-      <div className="container flex w-full flex-col items-center justify-center space-y-20 py-16 md:py-20 lg:py-24 xl:py-28">
+    <main className="flex flex-col items-center justify-center">
+      {/* Seção Inicial */}
+      <section className="container flex w-full flex-col items-center justify-center space-y-20 py-16 md:py-20 lg:py-24 xl:py-28">
         <div className="mx-auto w-full max-w-2xl text-center">
+          {/* Título */}
           <div className="mx-auto mb-5 flex max-w-fit items-center justify-center">
             <HoverBorderGradient
               containerClassName="rounded-full"
@@ -41,22 +30,31 @@ export default async function Hero() {
               <span>Pense, Crie, Compartilhe ! 🎉</span>
             </HoverBorderGradient>
           </div>
-
           <div className="mx-auto text-center text-4xl font-black leading-tight text-neutral-600 dark:text-neutral-400 md:text-7xl">
             <TextGenerateEffect duration={3} filter={false} words={words} />
           </div>
 
-          <div className="justify-center text-center"></div>
-          <div className="mx-auto mt-6 flex items-center justify-center space-x-5">
+          {/* Botão de Acesso */}
+          <div className="mt-6 flex items-center justify-center">
             <SendingButton href="/pt/login">Acessar</SendingButton>
           </div>
         </div>
+
+        {/* Lista de Espera */}
         <div className="w-full">
           <div className="flex w-full flex-wrap items-center justify-center gap-4 px-4">
             <WaitingList />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Seção de Preços */}
+      <section className="w-fullpy-16  rounded-xl">
+        <div className="container">
+          <PricingPlans />
+        </div>
+       
+      </section>
+    </main>
   );
 }
