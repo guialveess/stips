@@ -55,7 +55,8 @@ export default async function SingleProject({
   ];
 
   return (
-    <div className="flex items-center justify-center min-h-56">
+    <div className="flex items-center justify-center min-h-96 mt-16">
+      {/* Adicionado `mt-12` para espaçamento superior */}
       <div className="w-full max-w-4xl">
         <FloatingNav navItems={navItems} />
         <TabSections project={transformedProject} />

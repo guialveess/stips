@@ -41,6 +41,7 @@
     "@serwist/next": "^9.0.10",
     "@tabler/icons-react": "^3.26.0",
     "@uploadthing/react": "^7.1.1",
+    "@vercel/analytics": "^1.4.1",
     "arctic": "^2.2.2",
     "content": "^4.0.6",
     "dayjs": "^1.11.13",

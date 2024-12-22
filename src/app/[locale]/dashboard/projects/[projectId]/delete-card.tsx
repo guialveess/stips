@@ -49,39 +49,52 @@ export default function DeleteCard({ id }: { id: string }) {
   };
 
   return (
-    <Card className="mt-5 flex items-center justify-between p-6">
-      <div>
-        <CardTitle className="mb-2.5">Deletar Projeto</CardTitle>
-        <CardDescription>
-          O projeto será excluído permanentemente. Esta ação é irreversível e
-          não pode ser desfeito.
-        </CardDescription>
-      </div>
+    <div className="mt-12 min-h-screen items-center justify-center">
+      {/* Ajustado para centralizar e alinhar com outras páginas */}
+      <Card className="w-full max-w-2xl p-6">
+        <div>
+          <CardTitle className="mb-2.5">Deletar Projeto</CardTitle>
+          <CardDescription>
+            O projeto será excluído permanentemente. Esta ação é irreversível e
+            não pode ser desfeito.
+          </CardDescription>
+        </div>
 
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button variant="destructive" disabled={pending}>
-            {pending && <Icons.spinner className="mr-2 h-5 w-5 animate-spin" />}
-            Deletar
-          </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction asChild>
-              <Button variant="destructive" onClick={handleDelete} disabled={pending}>
-                {pending && (
-                  <Icons.spinner className="mr-2 h-5 w-5 animate-spin" />
-                )}
-                Deletar
-              </Button>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </Card>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="outline"
+              disabled={pending}
+              className="mt-4" // Adicionado espaçamento superior
+            >
+              {pending && (
+                <Icons.spinner className="mr-2 h-5 w-5 animate-spin" />
+              )}
+              Deletar
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancelar</AlertDialogCancel>
+              <AlertDialogAction asChild>
+                <Button
+                  variant="destructive"
+                  onClick={handleDelete}
+                  disabled={pending}
+                >
+                  {pending && (
+                    <Icons.spinner className="mr-2 h-5 w-5 animate-spin" />
+                  )}
+                  Deletar
+                </Button>
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </Card>
+    </div>
   );
 }

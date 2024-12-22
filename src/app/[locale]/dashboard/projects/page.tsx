@@ -78,7 +78,7 @@ export default async function Projects() {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2">
-                  <Button size="sm">Ver Mais</Button>
+                  <Button size="sm">Acessar Projeto</Button>
                 </div>
               </div>
             </div>

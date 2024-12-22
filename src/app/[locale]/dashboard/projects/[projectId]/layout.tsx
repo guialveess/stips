@@ -7,7 +7,7 @@ export default function SingleProjectLayout({
 }) {
   return (
     <>
-      <GoBack />
+      
       {children}
     </>
   );

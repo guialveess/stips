@@ -26,6 +26,7 @@ import { toast } from "@/hooks/use-toast";
 import { FreePlanLimitError } from "@/lib/utils";
 import { checkIfFreePlanLimitReached, createProject } from "./action";
 import { MultiStepLoader } from "@/components/ui/multi-step-loader";
+import { Card } from "@/components/ui/card";
 
 export const projectSchema = z.object({
   name: z.string().min(1, { message: "Please enter a project name." }),
@@ -105,16 +106,30 @@ export default function CreateProjectModal() {
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <div className="flex justify-center">
-            <div className="relative w-[300px] lg:w-[300px] aspect-[4/3] rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 cursor-pointer hover:shadow-md transition-all">
-              <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-                <Icons.projectPlus className="h-10 w-10 text-primary" />
-                <p className="text-xl font-bold text-muted-foreground">
-                  Crie seu projeto
-                </p>
+          <Card className="group relative flex cursor-pointer flex-col gap-3 rounded-lg border border-border bg-background p-4 shadow-lg shadow-black/5 transition-all hover:shadow-md">
+            <div className="flex gap-2">
+              {/* Icon Section */}
+              <Icons.projectPlus
+                className="mt-0.5 shrink-0 text-primary"
+                size={20}
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+
+              {/* Project Details */}
+              <div className="flex grow flex-col gap-2">
+                <div className="space-y-1">
+                  <h4 className="text-sm font-medium">Criar Novo Projeto</h4>
+                  <p className="text-xs text-muted-foreground">
+                    Clique para iniciar um novo projeto
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+
+            {/* Clickable Area */}
+            <span className="absolute inset-0" aria-hidden="true"></span>
+          </Card>
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-[500px]">
@@ -130,7 +145,10 @@ export default function CreateProjectModal() {
                   <FormItem>
                     <FormLabel>Nome do Projeto</FormLabel>
                     <FormControl>
-                      <Input placeholder="Digite o nome do projeto" {...field} />
+                      <Input
+                        placeholder="Digite o nome do projeto"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -154,7 +172,7 @@ export default function CreateProjectModal() {
                   Links Sociais (opcional)
                 </p>
                 {fields.map((item, index) => (
-                  <div key={item.id} className="flex gap-4 items-center">
+                  <div key={item.id} className="flex items-center gap-4">
                     <FormField
                       control={form.control}
                       name={`socialLinks.${index}.name`}
@@ -175,7 +193,10 @@ export default function CreateProjectModal() {
                         <FormItem>
                           <FormLabel>URL</FormLabel>
                           <FormControl>
-                            <Input placeholder="https://exemplo.com" {...field} />
+                            <Input
+                              placeholder="https://exemplo.com"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -190,7 +211,10 @@ export default function CreateProjectModal() {
                     </Button>
                   </div>
                 ))}
-                <Button type="button" onClick={() => append({ name: "", url: "" })}>
+                <Button
+                  type="button"
+                  onClick={() => append({ name: "", url: "" })}
+                >
                   Adicionar Link
                 </Button>
               </div>

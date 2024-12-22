@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { Analytics } from "@vercel/analytics/react"
 
 const fontSans = Inter({
   subsets: ["latin"],
