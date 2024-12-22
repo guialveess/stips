@@ -1,10 +1,9 @@
 const { nextui } = require("@nextui-org/theme");
 const { fontFamily } = require("tailwindcss/defaultTheme");
-// @ts-ignore
+const svgToDataUri = require("mini-svg-data-uri");
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
-const svgToDataUri = require("mini-svg-data-uri");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -94,10 +93,20 @@ module.exports = {
             opacity: 1,
             transform: "translate(-50%,-40%) scale(1)",
           },
-          rainbow: {
-            "0%": { "background-position": "0%" },
-            "100%": { "background-position": "200%" },
+        },
+        flip: {
+          to: {
+            transform: "rotate(360deg)",
           },
+        },
+        rotate: {
+          to: {
+            transform: "rotate(90deg)",
+          },
+        },
+        rainbow: {
+          "0%": { "background-position": "0%" },
+          "100%": { "background-position": "200%" },
         },
         "caret-blink": {
           "0%,70%,100%": {
@@ -110,6 +119,8 @@ module.exports = {
       },
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
+        flip: "flip 6s infinite steps(2, end)",
+        rotate: "rotate 3s linear infinite both",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         rainbow: "rainbow var(--speed, 2s) infinite linear",
       },
@@ -117,9 +128,8 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-
     require("@tailwindcss/typography"),
-    function ({ matchUtilities, theme, addUtilities }) {
+    function ({ matchUtilities, theme }) {
       matchUtilities(
         {
           dots: (value) => ({

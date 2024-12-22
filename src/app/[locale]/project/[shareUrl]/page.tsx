@@ -190,7 +190,7 @@ export default async function PublicProjectPage({
           <Card_05
             title="Plataformas Conectadas"
             category="Social Links"
-            socialLinks={project.socialLinks?.map((link) => ({
+            socialLinks={project.socialLinks?.map((link: any) => ({
               name: link.name ?? "Rede Social",
               url: link.url,
             }))}

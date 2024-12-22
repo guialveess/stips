@@ -6,6 +6,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import {BadgeAnimatedBorder} from "@/components/BadgeAnimatedBorder"
 
 interface Card05Props {
   category?: string;
@@ -30,9 +31,9 @@ export default function Card_05({
             {title}
           </h3>
         </div>
-        <Badge variant="outline" className="text-xs font-medium">
+        <BadgeAnimatedBorder variant="outline" className="text-xs font-medium">
           {category}
-        </Badge>
+        </BadgeAnimatedBorder>
       </div>
 
       {/* Social Links */}
