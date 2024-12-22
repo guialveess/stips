@@ -25,7 +25,7 @@ export default function LoginModal() {
       >
         Login
       </Button>
-      <CredenzaContent className="h-fit gap-0 border bg-background p-0 max-w-[400px]">
+      <CredenzaContent className="mx-auto my-12 h-fit gap-0 border bg-background p-0 max-w-[400px]">
         <CredenzaHeader className="border-b p-5">
           <CredenzaTitle className="font-semibold text-foreground">
             Entrar
