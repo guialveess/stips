@@ -4,7 +4,8 @@ import { getUserSubscriptionPlan } from "@/actions/subscription";
 import { siteConfig } from "@/config/site";
 import { proPlan } from "@/config/subscription";
 import { getCurrentSession } from "@/lib/server/session";
-import { stripe } from "@/lib/server/stripe";
+import stripe from "@/lib/server/stripe";
+
 
 export async function GET(req: NextRequest) {
   const locale = req.cookies.get("Next-Locale")?.value || "en";
@@ -19,8 +20,16 @@ export async function GET(req: NextRequest) {
 
     const subscriptionPlan = await getUserSubscriptionPlan(user.id);
 
-    // The user is on the pro plan.
-    // Create a portal session to manage subscription.
+    // Certifique-se de que os valores necessários estão disponíveis
+    if (!proPlan.stripePriceId) {
+      throw new Error("Stripe price ID is missing");
+    }
+
+    if (!user.email) {
+      throw new Error("User email is missing");
+    }
+
+    // O usuário está no plano Pro. Crie uma sessão no portal de faturamento.
     if (subscriptionPlan.isPro && subscriptionPlan.stripeCustomerId) {
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: subscriptionPlan.stripeCustomerId,
@@ -30,15 +39,14 @@ export async function GET(req: NextRequest) {
       return Response.json({ url: stripeSession.url });
     }
 
-    // The user is on the free plan.
-    // Create a checkout session to upgrade.
+    // O usuário está no plano gratuito. Crie uma sessão de checkout para upgrade.
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: billingUrl,
       cancel_url: billingUrl,
       payment_method_types: ["card"],
       mode: "subscription",
       billing_address_collection: "auto",
-      customer_email: user.email!,
+      customer_email: user.email,
       line_items: [
         {
           price: proPlan.stripePriceId,
@@ -46,16 +54,21 @@ export async function GET(req: NextRequest) {
         },
       ],
       metadata: {
-        userId: user.id,
+        userId: String(user.id), // Converta para string
       },
     });
 
-    return new Response(JSON.stringify({ url: stripeSession.url }));
+    return new Response(JSON.stringify({ url: stripeSession.url }), { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 });
     }
 
-    return new Response(null, { status: 500 });
+    console.error("Stripe API Error:", error); // Log para depuração
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    return new Response(
+      JSON.stringify({ message: "Internal Server Error", error: errorMessage }),
+      { status: 500 }
+    );
   }
 }
