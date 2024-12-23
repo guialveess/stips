@@ -32,7 +32,9 @@ export function BillingForm({
     setIsLoading(!isLoading);
 
     // Get a Stripe session URL.
-    const response = await fetch("/api/stripe");
+    const response = await fetch("/api/stripe", {
+      method: "POST",
+    });
 
     if (!response?.ok) {
       return toast({
