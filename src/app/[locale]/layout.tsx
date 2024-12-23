@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { Analytics } from "@vercel/analytics/react"
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -37,7 +36,7 @@ export default function RootLayout({ children, loginDialog }: Props) {
         )}
       >
         <ThemeProvider>
-          <header className="right-0 top-0 z-[50] w-full">
+          <header className="fixed right-0 top-0 z-[50] w-full">
             <nav className="flex items-center justify-between px-4 py-2">
               {/* Conteúdo no lado esquerdo */}
               <div className="flex items-center">

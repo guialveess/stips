@@ -139,7 +139,7 @@ export default async function PublicProjectPage({
             [24, 7],
             [25, 7],
           ]}
-          className="skew-y-12 [mask-image:radial-gradient(400px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]"
+          className="skew-y-12 [mask-image:radial-gradient(200px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]"
         />
       </div>
 
