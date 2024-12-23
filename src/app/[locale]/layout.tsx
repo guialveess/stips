@@ -4,6 +4,7 @@ import Script from "next/script";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from '@vercel/analytics/next';
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import "../globals.css";
@@ -60,6 +61,7 @@ export default function RootLayout({
           <main className="flex min-h-screen items-center justify-center">
             {children}
             {loginDialog}
+            <Analytics />
           </main>
           <Footer />
           <Toaster />
