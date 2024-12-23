@@ -5,7 +5,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { getCurrentSession } from "@/lib/server/session";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { House, MessageSquareShare, CircleUserRound } from "lucide-react";
-import { stripe } from "@/lib/server/stripe";
+import stripe from "@/lib/server/stripe";
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
