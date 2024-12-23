@@ -51,11 +51,11 @@
 
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --color-1: 0 100% 63%;
-  --color-2: 270 100% 63%;
-  --color-3: 210 100% 63%;
-  --color-4: 195 100% 63%;
-  --color-5: 90 100% 63%;
+    --color-1: 30 100% 50%; /* Laranja mais claro */
+    --color-2: 25 100% 50%; /* Laranja padrão */
+    --color-3: 20 100% 50%; /* Laranja escuro */
+    --color-4: 15 100% 50%; /* Mais próximo do vermelho */
+    --color-5: 10 100% 50%; /* Tom ainda mais escuro */
   }
 
   .dark {
@@ -109,7 +109,6 @@
 html {
   scroll-padding-bottom: 150px;
 }
-
 
 @layer base {
   * {

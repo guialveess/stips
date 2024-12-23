@@ -23,9 +23,14 @@ const fontHeading = localFont({
 type Props = {
   children: React.ReactNode;
   loginDialog: React.ReactNode;
+  headerClassName?: string; // Classe adicional para personalizar o header
 };
 
-export default function RootLayout({ children, loginDialog }: Props) {
+export default function RootLayout({
+  children,
+  loginDialog,
+  headerClassName = "",
+}: Props) {
   return (
     <html lang="en">
       <body
@@ -36,7 +41,7 @@ export default function RootLayout({ children, loginDialog }: Props) {
         )}
       >
         <ThemeProvider>
-          <header className="fixed right-0 top-0 z-[50] w-full">
+          <header className={cn("absolute right-0 top-0 z-[50] w-full", headerClassName)}>
             <nav className="flex items-center justify-between px-4 py-2">
               {/* Conteúdo no lado esquerdo */}
               <div className="flex items-center">

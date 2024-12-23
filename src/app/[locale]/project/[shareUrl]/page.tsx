@@ -139,7 +139,7 @@ export default async function PublicProjectPage({
             [24, 7],
             [25, 7],
           ]}
-          className="skew-y-12 [mask-image:radial-gradient(200px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]"
+          className="skew-y-12 [mask-image:radial-gradient(400px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]"
         />
       </div>
 
@@ -162,7 +162,7 @@ export default async function PublicProjectPage({
           />
           {/* Contêiner para o efeito de pulsação na borda */}
           <div className="relative h-16 w-16 rounded-full p-[3px]">
-            <div className="from-color-1 via-color-2 to-color-3 absolute inset-0 animate-pulse rounded-full bg-gradient-to-r shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+            <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 shadow-[0_0_10px_rgba(255,165,0,0.5)]"></div>
             {/* Avatar */}
             <Image
               src={project.user.picture || "/placeholder-avatar.png"}
