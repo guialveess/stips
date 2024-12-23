@@ -41,21 +41,26 @@ export async function createProject(payload: Payload) {
 }
 
 
-export async function checkIfFreePlanLimitReached() {
+export async function checkIfPlanLimitReached() {
   const { user } = await getCurrentSession();
-  const subscriptionPlan = await getUserSubscriptionPlan(user?.id as string);
+  if (!user) {
+    throw new Error("User not authenticated");
+  }
 
-  // If user is on a free plan.
-  // Check if user has reached limit of 3 projects.
-  if (subscriptionPlan?.isPro) return false;
+  const subscriptionPlan = await getUserSubscriptionPlan(user.id);
 
+  // Define o limite com base no plano
+  const projectLimit = subscriptionPlan.isPro ? 10 : 1;
+
+  // Conta os projetos do usuário
   const count = await prisma.project.count({
     where: {
-      userId: user?.id,
+      userId: user.id,
     },
   });
 
-  return count >= 1;
+  // Retorna true se o limite foi atingido
+  return count >= projectLimit;
 }
 
 export async function getProjects() {

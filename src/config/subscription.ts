@@ -7,7 +7,7 @@ if (!process.env.STRIPE_PRO_PLAN_ID) {
 export const freePlan: SubscriptionPlan = {
   name: "Free",
   description:
-    "Você pode criar até 3 projetos. Atualize para o plano PRO para projetos ilimitados.",
+    "Você pode criar até 1 projeto. Atualize para o plano PRO para criar até 10 projetos",
   stripePriceId: "",
 };
 

@@ -24,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { FreePlanLimitError } from "@/lib/utils";
-import { checkIfFreePlanLimitReached, createProject } from "./action";
+import { checkIfPlanLimitReached, createProject } from "./action";
 import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 import { Card } from "@/components/ui/card";
 
@@ -72,7 +72,7 @@ export default function CreateProjectModal() {
       setIsOpen(false); // Fecha o Dialog imediatamente
       setIsLoading(true); // Ativa o loader
 
-      const limitReached = await checkIfFreePlanLimitReached();
+      const limitReached = await checkIfPlanLimitReached();
       if (limitReached) {
         throw new FreePlanLimitError();
       }
