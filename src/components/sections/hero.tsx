@@ -16,7 +16,7 @@ export default async function Hero() {
   ).then((res) => res.json());
 
   return (
-    <main className="flex flex-col items-center justify-center mt-14">
+    <main className="flex flex-col items-center justify-center mt-8">
       {/* Seção Inicial */}
       <section className="container flex w-full flex-col items-center justify-center space-y-20 py-16 md:py-20 lg:py-24 xl:py-28">
         <div className="mx-auto w-full max-w-2xl text-center">
