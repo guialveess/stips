@@ -6,11 +6,11 @@ import { proPlan } from "@/config/subscription";
 import { getCurrentSession } from "@/lib/server/session";
 import stripe from "@/lib/server/stripe";
 
-
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const locale = req.cookies.get("Next-Locale")?.value || "en";
 
   const billingUrl = siteConfig(locale).url + "/dashboard/billing/";
+
   try {
     const { user, session } = await getCurrentSession();
 
@@ -18,9 +18,10 @@ export async function GET(req: NextRequest) {
       return new Response("Unauthorized", { status: 401 });
     }
 
-    const subscriptionPlan = await getUserSubscriptionPlan(user.id);
+    if (!user) {
+      return new Response("User not found", { status: 404 });
+    }
 
-    // Certifique-se de que os valores necessários estão disponíveis
     if (!proPlan.stripePriceId) {
       throw new Error("Stripe price ID is missing");
     }
@@ -29,6 +30,8 @@ export async function GET(req: NextRequest) {
       throw new Error("User email is missing");
     }
 
+    const subscriptionPlan = await getUserSubscriptionPlan(user.id);
+
     // O usuário está no plano Pro. Crie uma sessão no portal de faturamento.
     if (subscriptionPlan.isPro && subscriptionPlan.stripeCustomerId) {
       const stripeSession = await stripe.billingPortal.sessions.create({
@@ -36,7 +39,7 @@ export async function GET(req: NextRequest) {
         return_url: billingUrl,
       });
 
-      return Response.json({ url: stripeSession.url });
+      return new Response(JSON.stringify({ url: stripeSession.url }), { status: 200 });
     }
 
     // O usuário está no plano gratuito. Crie uma sessão de checkout para upgrade.
@@ -60,14 +63,14 @@ export async function GET(req: NextRequest) {
 
     return new Response(JSON.stringify({ url: stripeSession.url }), { status: 200 });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify(error.issues), { status: 422 });
-    }
+    console.error("Stripe API Error:", error);
 
-    console.error("Stripe API Error:", error); // Log para depuração
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return new Response(
-      JSON.stringify({ message: "Internal Server Error", error: errorMessage }),
+      JSON.stringify({
+        message: "Internal Server Error",
+        error: errorMessage,
+      }),
       { status: 500 }
     );
   }
