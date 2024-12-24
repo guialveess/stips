@@ -211,6 +211,12 @@ export async function deleteProjectById(id: string) {
       },
     });
 
+    await prisma.customization.deleteMany({
+      where: {
+        projectId: id,
+      },
+    });
+
     // Exclui o projeto
     await prisma.project.delete({
       where: { id },
