@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { updateProjectById } from "../action";
+import { updateProjectById, updateCustomization } from "../action"; // Importa a função de customização
 import { projectSchema, type ProjectFormValues } from "../create-project-modal";
 
 import {
@@ -36,12 +36,18 @@ export default function EditableDetails({
     id: string;
     shareUrl: string;
     socialLinks: { name?: string; url: string }[];
+    customizations?: { key: string; value: string }[]; // Adiciona customizações
   };
 }) {
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
     values: initialValues,
   });
+
+  const [background, setBackground] = useState(
+    initialValues.customizations?.find((c) => c.key === "background")?.value ||
+      ""
+  );
 
   const newLinkForm = useForm<{ name: string; url: string }>({
     defaultValues: { name: "", url: "" },
@@ -61,6 +67,20 @@ export default function EditableDetails({
   async function onSubmit(values: ProjectFormValues) {
     try {
       await updateProjectById(initialValues.id, values);
+
+      // Atualiza o background se houver mudanças
+      if (
+        background !==
+        initialValues.customizations?.find((c) => c.key === "background")?.value
+      ) {
+        if (background) {
+          await updateCustomization(initialValues.id, "background", background);
+        } else {
+          // Remove o background
+          await updateCustomization(initialValues.id, "background", "");
+        }
+      }
+
       toast({
         title: "Project updated successfully.",
       });
@@ -190,6 +210,8 @@ export default function EditableDetails({
           <FormMessage />
         </FormItem>
 
+        {/* Background Field */}
+
         {/* Social Links */}
         {initialValues.socialLinks?.length > 0 && (
           <div className="mt-8">
@@ -254,7 +276,6 @@ export default function EditableDetails({
                           </TableCell>
                           <TableCell>
                             <div className="flex space-x-2">
-                              {/* Botão de Editar */}
                               <Button
                                 onClick={() => {
                                   setEditingIndex(index);
@@ -264,8 +285,6 @@ export default function EditableDetails({
                               >
                                 Editar
                               </Button>
-
-                              {/* Botão de Copiar funcional para cada rede social */}
                             </div>
                           </TableCell>
                         </>

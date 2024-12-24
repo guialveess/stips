@@ -45,16 +45,31 @@ model User {
 }
 
 model Project {
-  id          String       @id @default(uuid())
+  id          String           @id @default(uuid())
   name        String
   domain      String
   userId      String
-  user        User         @relation(fields: [userId], references: [id])
-  shareUrl    String?      @unique
-  socialLinks SocialLink[] // Relação com os links sociais
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  user        User             @relation(fields: [userId], references: [id])
+  shareUrl    String?          @unique
+  socialLinks SocialLink[]     // Relação com os links sociais
+  customizations Customization[] // Relação com as customizações
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 }
+
+model Customization {
+  id        String  @id @default(uuid())
+  key       String  // Nome da customização (ex.: "background", "accessory", etc.)
+  value     String  // Valor da customização (ex.: URL da imagem ou JSON com detalhes)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Adiciona uma chave única composta para garantir unicidade por projeto e chave
+  @@unique([projectId, key])
+}
+
 
 model SocialLink {
   id        String   @id @default(uuid())

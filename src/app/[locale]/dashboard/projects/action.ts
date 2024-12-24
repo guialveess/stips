@@ -36,8 +36,34 @@ export async function createProject(payload: Payload) {
     },
   });
 
+  // Adicionar customização padrão (ex.: background)
+  await updateCustomization(project.id, "background", "default-background.jpg");
+
   revalidatePath(`/dashboard/projects`);
   return project;
+}
+
+export async function updateCustomization(projectId: string, key: string, value: string) {
+  return prisma.customization.upsert({
+    where: {
+      projectId_key: {
+        projectId,
+        key,
+      },
+    },
+    update: { value },
+    create: {
+      projectId,
+      key,
+      value,
+    },
+  });
+}
+
+export async function getCustomizationsByProject(projectId: string) {
+  return prisma.customization.findMany({
+    where: { projectId },
+  });
 }
 
 
@@ -92,8 +118,13 @@ export async function getProjectById(id: string) {
 }
 
 
-export async function updateProjectById(id: string, payload: Payload) {
+export async function updateProjectById(
+  id: string,
+  payload: Payload,
+  customizations?: { key: string; value: string }[]
+) {
   const { user } = await getCurrentSession();
+
   await prisma.project.update({
     where: {
       id,
@@ -110,8 +141,17 @@ export async function updateProjectById(id: string, payload: Payload) {
       },
     },
   });
+
+  // Atualiza customizações, se fornecidas
+  if (customizations) {
+    for (const customization of customizations) {
+      await updateCustomization(id, customization.key, customization.value);
+    }
+  }
+
   revalidatePath(`/dashboard/projects`);
 }
+
 
 export async function getProjectByShareUrl(shareUrl: string) {
   console.log("Buscando projeto com shareUrl:", shareUrl);
@@ -126,6 +166,7 @@ export async function getProjectByShareUrl(shareUrl: string) {
         },
       },
       socialLinks: true, // Inclui os links sociais relacionados
+      customizations: true, // Inclui as customizações
     },
   });
 
@@ -135,7 +176,6 @@ export async function getProjectByShareUrl(shareUrl: string) {
 
   return project;
 }
-
 
 export async function deleteProjectById(id: string) {
   if (!id) {

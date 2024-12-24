@@ -44,6 +44,10 @@ export default async function PublicProjectPage({
     );
   }
 
+  // Obter customizações do projeto
+  const customizations = project.customizations || [];
+  const background = customizations.find((c) => c.key === "background")?.value;
+
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL ||
     (process.env.NODE_ENV === "production"
@@ -53,7 +57,18 @@ export default async function PublicProjectPage({
   const publicUrl = `${baseUrl}/project/${shareUrl}`;
 
   return (
-    <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden">
+    <div
+      className="relative flex h-screen w-screen items-center justify-center overflow-hidden"
+      style={
+        background
+          ? {
+              backgroundImage: `url(${background})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+          : undefined
+      }
+    >
       {/* GridPattern cobrindo toda a tela */}
       <div className="absolute inset-0">
         <GridPattern
