@@ -19,7 +19,7 @@ export default function LoginModal() {
       <DialogContent className="w-full max-w-[400px] rounded-lg shadow-lg borde">
         <DialogHeader className="text-center">
           <DialogTitle asChild>
-            <h2 className="font-bold text-2xl text-white tracking-tight">
+            <h2 className="font-bold text-2xl text-black tracking-tight dark:text-white">
               Bem-vindo de volta!
             </h2>
           </DialogTitle>
