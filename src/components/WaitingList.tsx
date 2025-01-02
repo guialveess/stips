@@ -1,17 +1,38 @@
 "use client";
+import { motion } from "framer-motion"; // Importando Framer Motion
 import { CheckCircle2 } from "lucide-react";
-import { Send } from "lucide-react"; // Ícone do avião
+import { Send } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "./ui/badge";
 
 export default function WaitingList() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Email submitted:", email);
-    setSubmitted(true);
+
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao enviar o e-mail.");
+      }
+
+      console.log("Email submitted:", email);
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Erro:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,24 +68,36 @@ export default function WaitingList() {
               placeholder="Digite seu e-mail"
               className="flex-1 rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 outline-none focus:ring-2 focus:ring-indigo-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
             />
-            {/* Botão adaptado para telefone */}
             <button
               type="submit"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:h-auto sm:w-auto sm:gap-2 sm:rounded-lg sm:px-4 sm:py-2"
+              disabled={loading}
             >
-              <Send className="h-5 w-5 text-white sm:hidden" />
-              <span className="hidden text-sm font-medium text-white sm:inline">
-                Inscrever-se
-              </span>
+              {loading ? (
+                <div className="h-5 w-5 animate-spin border-2 border-white border-t-transparent rounded-full"></div>
+              ) : (
+                <>
+                  <Send className="h-5 w-5 text-white sm:hidden" />
+                  <span className="hidden text-sm font-medium text-white sm:inline">
+                    Inscrever-se
+                  </span>
+                </>
+              )}
             </button>
           </form>
         ) : (
-          <Badge
-            variant="outline"
-            className="mt-6 text-pretty bg-amber-50 pl-4 text-sm font-semibold text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            Obrigado! Você será notificado quando estivermos ao vivo 😊.
-          </Badge>
+            <Badge
+              variant="default"
+              className="mt-6 text-pretty bg-amber-50 pl-4 text-sm font-semibold text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+            >
+              Obrigado! Você será notificado quando estivermos ao vivo 😊.
+            </Badge>
+          </motion.div>
         )}
       </div>
     </div>

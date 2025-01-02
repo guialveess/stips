@@ -43,6 +43,7 @@
     "@uploadthing/react": "^7.1.1",
     "@vercel/analytics": "^1.4.1",
     "arctic": "^2.2.2",
+    "classnames": "^2.5.1",
     "content": "^4.0.6",
     "dayjs": "^1.11.13",
     "framer-motion": "^11.15.0",
@@ -67,6 +68,7 @@
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/classnames": "^2.3.0",
     "@types/node": "22.9.0",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",

@@ -79,3 +79,10 @@ model SocialLink {
   url       String
   createdAt DateTime @default(now())
 }
+
+model Waitlist {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  notified  Boolean  @default(false) // Para indicar se o usuário já foi notificado
+}
