@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence  } from "framer-motion";
 
 interface Feature {
   name: string;
@@ -64,7 +64,7 @@ export default function PricingPlans({
 
   const handleButtonClick = () => {
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 5000); // Alerta desaparece após 5 segundos
+    setTimeout(() => setShowAlert(false), 7000); // Alerta desaparece após 5 segundos
   };
 
   return (
@@ -186,27 +186,30 @@ export default function PricingPlans({
       </div>
 
       {/* Alerta */}
-      {showAlert && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-6 w-full max-w-xl mx-auto bg-gradient-to-b from-violet-50 to-white dark:from-violet-950/20 dark:to-zinc-950 border border-violet-100 dark:border-violet-900/50 shadow-lg rounded-xl p-4"
-        >
-          <div className="flex items-center gap-4">
-            <div className="p-2.5 rounded-xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-indigo-500 dark:from-fuchsia-600 dark:via-violet-600 dark:to-indigo-600">
-              <Check className="h-5 w-5 text-white" />
-            </div>
-            <div className="space-y-1">
-              <h3 className="font-medium text-violet-900 dark:text-violet-100">
-                Estamos quase prontos... 🚧
-              </h3>
-              <p className="text-sm text-violet-600 dark:text-violet-300">
-                Isso é triste, mas não se desanime, estamos trabalhando para trazer a melhor experiência para você.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
+      <AnimatePresence>
+  {showAlert && (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      className="mt-6 w-full max-w-xl mx-auto bg-gradient-to-b from-orange-50 to-white dark:from-orange-950/20 dark:to-zinc-950 border border-orange-100 dark:border-orange-900/50 shadow-lg rounded-xl p-4"
+    >
+      <div className="flex items-center gap-4">
+        <div className="p-2.5 rounded-xl bg-gradient-to-br from-orange-500 via-yellow-500 to-red-500 dark:from-orange-600 dark:via-yellow-600 dark:to-red-600">
+          <Check className="h-5 w-5 text-white" />
+        </div>
+        <div className="space-y-1">
+          <h3 className="font-medium text-orange-900 dark:text-orange-100">
+            Estamos quase prontos... 🚧
+          </h3>
+          <p className="text-sm text-orange-600 dark:text-orange-300">
+            Isso é triste, mas não se desanime, estamos trabalhando para trazer a melhor experiência para você.
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </div>
   );
 }
