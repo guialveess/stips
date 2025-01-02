@@ -30,7 +30,20 @@ import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-const projectSchema = [
+export const projectSchema = z.object({
+  name: z.string().min(1, { message: "Insira um nome de projeto." }),
+  domain: z.string().min(1, { message: "Insira um domínio de projeto." }),
+  socialLinks: z
+    .array(
+      z.object({
+        name: z.string().optional(),
+        url: z.string().url({ message: "Insira um URL válido." }),
+      })
+    )
+    .optional(),
+});
+
+export const stepSchemas = [
   z.object({
     name: z.string().min(1, { message: "Insira um nome de projeto." }),
     domain: z.string().min(1, { message: "Insira um domínio de projeto." }),
@@ -47,7 +60,7 @@ const projectSchema = [
   }),
 ];
 
-export type ProjectFormValues = z.infer<(typeof projectSchema)[number]>;
+export type ProjectFormValues = z.infer<typeof projectSchema>;
 
 const steps = [
   {
@@ -96,7 +109,8 @@ export default function CreateProjectDrawer() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Estado para controlar o Drawer
 
-  const schema = projectSchema[stepIndex];
+  const schema = stepSchemas[stepIndex];
+
 
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(schema),
@@ -233,7 +247,7 @@ export default function CreateProjectDrawer() {
                           <FormControl>
                             <Input
                               className="w-full"
-                              placeholder="Digite o nome do seu projeto"
+                              placeholder="Digite o nome do projeto"
                               {...field}
                             />
                           </FormControl>
