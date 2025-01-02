@@ -198,10 +198,10 @@ export default function PricingPlans({
             </div>
             <div className="space-y-1">
               <h3 className="font-medium text-violet-900 dark:text-violet-100">
-                Notificação 🎉
+                Estamos quase prontos... 🚧
               </h3>
               <p className="text-sm text-violet-600 dark:text-violet-300">
-                Quando o serviço estiver disponível, você será notificado!
+                Isso é triste, mas não se desanime, estamos trabalhando para trazer a melhor experiência para você.
               </p>
             </div>
           </div>

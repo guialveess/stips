@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import SidebarNav from "@/components/layout/sidebar-nav";
 import { getCurrentSession } from "@/lib/server/session";
+import Gradients from "@/components/custom/Gradients";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
