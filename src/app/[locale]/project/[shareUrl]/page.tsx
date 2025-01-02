@@ -168,19 +168,13 @@ export default async function PublicProjectPage({
         {/* Contêiner principal do avatar com o gorro */}
         <div className="group relative">
           {/* Gorro Natalino */}
-          <Image
-            src="/santa-hat.png"
-            alt="Gorro Natalino"
-            width={25}
-            height={25}
-            className="absolute -top-3.5 left-6 z-20 h-10 w-10"
-          />
+          
           {/* Contêiner para o efeito de pulsação na borda */}
-          <div className="relative h-16 w-16 rounded-full p-[3px]">
+          <div className="relative h-16 w-16 rounded-full p-[3px] mt-14">
             <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 shadow-[0_0_10px_rgba(255,165,0,0.5)]"></div>
             {/* Avatar */}
             <Image
-              src={project.user.picture || "/placeholder-avatar.png"}
+              src={project.user.picture || "/default-avatar.png"}
               alt={`${project.user.name}'s avatar`}
               width={50}
               height={50}
@@ -215,3 +209,4 @@ export default async function PublicProjectPage({
     </div>
   );
 }
+
