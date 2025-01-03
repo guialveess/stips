@@ -10,33 +10,55 @@ export const sendWelcomeEmail = async ({
   toMail,
   userName,
 }: SendWelcomeEmailProps) => {
-  const subject = "Obrigado por usar Stips!";
-  const temp = ThanksTemp({ userName });
+  const subject = "Obrigado por usar Stipss!";
+  
+  try {
+    const temp = ThanksTemp({ userName });
 
-  await resend.emails.send({
-    from: `Stipss App <stipss.shop>`,
-    to: toMail,
-    subject: subject,
-    headers: {
-      "X-Entity-Ref-ID": nanoid(),
-    },
-    react: temp,
-    text: "",
-  });
+    if (!temp) {
+      throw new Error("O template de e-mail de boas-vindas está vazio.");
+    }
+
+    await resend.emails.send({
+      from: `Stipss App <noreply@stipss.shop>`, // Use um e-mail válido
+      to: toMail,
+      subject,
+      headers: {
+        "X-Entity-Ref-ID": nanoid(),
+      },
+      react: temp,
+      text: `Olá ${userName}, obrigado por usar Stipss!`,
+    });
+
+    console.log("E-mail de boas-vindas enviado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao enviar o e-mail de boas-vindas:", error);
+  }
 };
 
 export const sendOTP = async ({ toMail, code, userName }: SendOTPProps) => {
   const subject = "OTP para Stipss";
-  const temp = VerificationTemp({ userName, code });
 
-  await resend.emails.send({
-    from: `Stipss App <stipss.shop>`,
-    to: toMail,
-    subject: subject,
-    headers: {
-      "X-Entity-Ref-ID": nanoid(),
-    },
-    react: temp,
-    text: "",
-  });
+  try {
+    const temp = VerificationTemp({ userName, code });
+
+    if (!temp) {
+      throw new Error("O template de e-mail de OTP está vazio.");
+    }
+
+    await resend.emails.send({
+      from: `Stipss App <noreply@stipss.shop>`, // Use um e-mail válido
+      to: toMail,
+      subject,
+      headers: {
+        "X-Entity-Ref-ID": nanoid(),
+      },
+      react: temp,
+      text: `Olá ${userName}, seu código OTP é: ${code}`,
+    });
+
+    console.log("E-mail de OTP enviado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao enviar o e-mail de OTP:", error);
+  }
 };
