@@ -37,7 +37,7 @@ export const sendWelcomeEmail = async ({
 };
 
 export const sendOTP = async ({ toMail, code, userName }: SendOTPProps) => {
-  const subject = "OTP para Stipss";
+  const subject = "Stipss - Código de verificação";
 
   try {
     const temp = VerificationTemp({ userName, code });

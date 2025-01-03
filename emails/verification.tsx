@@ -25,12 +25,14 @@ const VerificationTemp: React.FC<Readonly<VerificationTemplateProps>> = ({
     <Preview>Verifique seu e-mail</Preview>
     <Tailwind>
       <Body className="bg-gray-100">
-        <Container className="p-6 m-10 mx-auto bg-white">
-          <Text className="mb-4 text-lg">Tudo bem? {userName.split(" ")[0]}</Text>
-          <Text className="mb-2 text-xl font-bold text-center text-green-600">
+        <Container className="m-10 mx-auto bg-white p-6">
+          <Text className="mb-4 text-lg">
+            Tudo bem? {userName.split(" ")[0]}
+          </Text>
+          <Text className="mb-2 text-center text-xl font-bold text-orange-600">
             Uhuu, seu código chegou! 🎉
           </Text>
-          <Text className="text-base font-semibold text-center">
+          <Text className="text-center text-base font-semibold">
             Aqui está o seu código de verificação.
           </Text>
           <Section className="mt-4 text-center">
@@ -46,6 +48,20 @@ const VerificationTemp: React.FC<Readonly<VerificationTemplateProps>> = ({
             <br />
             <span className="font-bold">Stipss</span>
           </Text>
+          <Section className="mt-4 border-t border-gray-200 pt-4 text-center text-sm text-gray-600">
+            <Text className="mb-2">
+              Precisa de ajuda? Acesse nossa central de suporte.
+            </Text>
+            <Text>
+              🌐{" "}
+              <a
+                href="https://stipss.vercel.app/pt/"
+                className="text-blue-600 underline"
+              >
+                stipss.vercel.app
+              </a>
+            </Text>
+          </Section>
         </Container>
       </Body>
     </Tailwind>
