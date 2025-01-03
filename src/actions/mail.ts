@@ -10,11 +10,11 @@ export const sendWelcomeEmail = async ({
   toMail,
   userName,
 }: SendWelcomeEmailProps) => {
-  const subject = "Thanks for using ChadNext!";
+  const subject = "Obrigado por usar Stips!";
   const temp = ThanksTemp({ userName });
 
   await resend.emails.send({
-    from: `ChadNext App <chadnext@moinulmoin.com>`,
+    from: `Stipss App <stipss.shop>`,
     to: toMail,
     subject: subject,
     headers: {
@@ -26,11 +26,11 @@ export const sendWelcomeEmail = async ({
 };
 
 export const sendOTP = async ({ toMail, code, userName }: SendOTPProps) => {
-  const subject = "OTP for ChadNext";
+  const subject = "OTP para Stipss";
   const temp = VerificationTemp({ userName, code });
 
   await resend.emails.send({
-    from: `ChadNext App <chadnext@moinulmoin.com>`,
+    from: `Stipss App <stipss.shop>`,
     to: toMail,
     subject: subject,
     headers: {

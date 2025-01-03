@@ -10,7 +10,7 @@ import {
 } from "@react-email/components";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_URL ?? "https://chadnext.moinulmoin.com";
+  process.env.NEXT_PUBLIC_URL ?? "https://stipss.vercel.app/pt/";
 
 interface VerificationTemplateProps {
   userName: string;
@@ -23,26 +23,26 @@ const VerificationTemp: React.FC<Readonly<VerificationTemplateProps>> = ({
 }) => (
   <Html>
     <Head />
-    <Preview>Verify your email</Preview>
+    <Preview>Verifique seu e-mail</Preview>
     <Tailwind>
       <Body className="bg-gray-100">
         <Container className="p-6 m-10 mx-auto bg-white">
-          <Text className="mb-4 text-lg">Hi, {userName.split(" ")[0]}</Text>
+          <Text className="mb-4 text-lg">Tudo bem? {userName.split(" ")[0]}</Text>
           <Text className="text-base font-semibold text-center">
-            Here is your verification code.
+          Aqui está o seu código de verificação.
           </Text>
           <Section className="mt-4 text-center">
             <div className="inline-block px-6 py-3 text-xl font-bold tracking-[10px] text-slate-900">
               {code}
             </div>
             <Text className="mt-2.5 text-sm">
-              This code expires in 3 minutes and can only be used once.
+            Este código expira em 3 minutos e só pode ser usado uma vez.
             </Text>
           </Section>
           <Text className="mt-8 text-base">
             Best,
             <br />
-            <span className="font-bold">ChadNext</span>
+            <span className="font-bold">Stipss</span>
           </Text>
         </Container>
       </Body>

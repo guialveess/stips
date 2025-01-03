@@ -17,28 +17,20 @@ interface ThanksTemplateProps {
 const ThanksTemp: React.FC<Readonly<ThanksTemplateProps>> = ({ userName }) => (
   <Html>
     <Head />
-    <Preview>Welcome to ChadNext.</Preview>
+    <Preview>Bem-vindo ao Stipss.</Preview>
     <Tailwind>
       <Body className="bg-gray-100">
         <Container className="mx-auto my-10 bg-white">
           <Section className="m-6">
-            <Text className="mx-10 text-lg font-bold">Hi {userName} 👋 ,</Text>
+            <Text className="mx-10 text-lg font-bold">Olá {userName} 👋 ,</Text>
             <Text className="mx-10 text-base">
-              Welcome to ChadNext. Now you can build your idea faster. You can
-              star the project on GitHub. That would be very helpful.
+              Agora você pode construir e gerenciar sua coleção de links de
+              forma simples e organizada. Categorize, compartilhe e acesse seus
+              links favoritos sempre que precisar, tudo em um só lugar.
+              Experimente e descubra como o Stipss pode facilitar sua vida! 🌐✨
             </Text>
-            <Section className="my-5 text-center">
-              <Button
-                className="inline-block px-6 py-3 text-base text-white rounded-md bg-bg-white bg-slate-900"
-                href="https://github.com/moinulmoin/chadnext"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Star on GitHub
-              </Button>
-            </Section>
-            <Text className="mx-10 text-base font-light">Best,</Text>
-            <Text className="mx-10 text-base font-bold">ChadNext</Text>
+            <Text className="mx-10 text-base font-light">Melhor,</Text>
+            <Text className="mx-10 text-base font-bold">Stipss</Text>
           </Section>
         </Container>
       </Body>

@@ -76,7 +76,7 @@ const User = forwardRef<HTMLDivElement, UserProps>(
           <Avatar src={src} alt={alt || name} {...restAvatarProps} />
           <div className="flex flex-col">
             {name && (
-              <span className="font-medium text-gray-800 dark:text-gray-200">
+              <span className="font-medium text-gray-800 text-sm dark:text-gray-200">
                 {name}
               </span>
             )}
