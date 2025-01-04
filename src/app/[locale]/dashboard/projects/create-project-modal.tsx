@@ -203,7 +203,7 @@ export default function CreateProjectDrawer() {
 
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Criar Projeto 🎈</DrawerTitle>
+            <DrawerTitle>Criar Projeto </DrawerTitle>
           </DrawerHeader>
           <div className="flex flex-col items-center space-y-4 p-4">
             <div className="flex w-full items-center justify-between">

@@ -1,10 +1,12 @@
 import { getProjectByShareUrl } from "@/app/[locale]/dashboard/projects/action";
 import { BrowserComponent } from "@/components/mock-browser";
 import GridPattern from "@/components/ui/grid-pattern";
+import { BentoGrid } from "@/components/custom/BentoGrid";
 import { Spotlight } from "@/components/Spotlight";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import Card_05 from "@/components/Card_05";
+import Card06 from "@/components/custom/Card_06";
 
 export default async function PublicProjectPage({
   params,
@@ -58,7 +60,7 @@ export default async function PublicProjectPage({
 
   return (
     <div
-      className="relative flex h-screen w-screen items-center justify-center overflow-hidden"
+      className="relative flex min-h-svh w-screen flex-col items-center justify-center overflow-hidden"
       style={
         background
           ? {
@@ -70,7 +72,7 @@ export default async function PublicProjectPage({
       }
     >
       {/* GridPattern cobrindo toda a tela */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 opacity-55">
         <GridPattern
           squares={[
             // Letra S
@@ -164,49 +166,27 @@ export default async function PublicProjectPage({
         fill="black"
       />
 
-      <div className="absolute top-10 flex flex-col items-center space-y-2">
-        {/* Contêiner principal do avatar com o gorro */}
-        <div className="group relative">
-          {/* Gorro Natalino */}
-          
-          {/* Contêiner para o efeito de pulsação na borda */}
-          <div className="relative h-16 w-16 rounded-full p-[3px] mt-14">
-            <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 shadow-[0_0_10px_rgba(255,165,0,0.5)]"></div>
-            {/* Avatar */}
-            <Image
-              src={project.user.picture || "/default-avatar.png"}
-              alt={`${project.user.name}'s avatar`}
-              width={50}
-              height={50}
-              className="relative z-10 h-full w-full rounded-full bg-white object-cover"
-            />
-          </div>
-        </div>
-      </div>
-
       {/* Browser Component */}
-      <BrowserComponent
-        className="relative z-10 mt-40 h-[300px] w-full max-w-[600px] sm:mt-32 lg:mt-14"
-        shareUrl={publicUrl}
-      >
-        <section className="flex h-full w-full flex-col items-center justify-center space-y-4 text-center">
-          <Badge className="mt-4 text-sm font-medium text-white dark:text-black">
-            <span>🎉</span>
-            {project.user.name}
-          </Badge>
 
-          {/* Redes Sociais */}
-          <Card_05
-            title="Plataformas Conectadas"
-            category="Social Links"
-            socialLinks={project.socialLinks?.map((link: any) => ({
-              name: link.name ?? "Rede Social",
-              url: link.url,
-            }))}
-          />
-        </section>
-      </BrowserComponent>
+      <section className="relative z-10 mt-32 flex w-full max-w-[600px] flex-col items-center justify-center space-y-4 pb-20 text-center sm:mt-32 lg:mt-14">
+        <Badge className="mt-4 text-sm font-medium text-white dark:text-black">
+          <span>🎉</span>
+          {project.user.name}
+        </Badge>
+
+        {/* Redes Sociais */}
+        <Card_05
+          title={project.user.name ?? "Nome não disponível"} // Passa o nome da pessoa aqui
+          category="Social Links"
+          socialLinks={project.socialLinks?.map((link: any) => ({
+            name: link.name ?? "Rede Social",
+            url: link.url,
+          }))}
+        />
+      </section>
+
+      {/* Adicionando espaçamento */}
+      <Card06 className="bottom-16" />
     </div>
   );
 }
-

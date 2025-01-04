@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 mt-14 w-full border-t bg-neutral-50 py-4 dark:bg-neutral-950">
+    <footer className="relative z-10 w-full border-t bg-neutral-50 py-4 dark:bg-neutral-950">
       <div className="container flex flex-col items-center justify-between gap-4 md:h-10 md:flex-row">
         {/* Texto no lado esquerdo */}
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-1">
