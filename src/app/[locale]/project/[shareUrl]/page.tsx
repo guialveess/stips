@@ -60,7 +60,7 @@ export default async function PublicProjectPage({
 
   return (
     <div
-      className="relative flex min-h-svh w-screen flex-col items-center justify-center overflow-hidden"
+      className="relative flex flex-col min-h-svh w-screen  items-center justify-center overflow-hidden"
       style={
         background
           ? {
@@ -160,30 +160,26 @@ export default async function PublicProjectPage({
         />
       </div>
 
-      {/* Spotlight existente */}
-      <Spotlight
-        className="absolute -top-40 left-0 md:-top-20 md:left-20"
-        fill="black"
-      />
+
 
       {/* Browser Component */}
+     
+      <section className="mt-32 w-full max-w-[600px] pb-20 sm:mt-32 lg:mt-14 relative  z-10 flex flex-col items-center justify-center space-y-4 text-center">
+  <Badge className="mt-4 text-sm font-medium text-white dark:text-black">
+    <span>🎉</span>
+    {project.user.name}
+  </Badge>
 
-      <section className="relative z-10 mt-32 flex w-full max-w-[600px] flex-col items-center justify-center space-y-4 pb-20 text-center sm:mt-32 lg:mt-14">
-        <Badge className="mt-4 text-sm font-medium text-white dark:text-black">
-          <span>🎉</span>
-          {project.user.name}
-        </Badge>
-
-        {/* Redes Sociais */}
-        <Card_05
-          title={project.user.name ?? "Nome não disponível"} // Passa o nome da pessoa aqui
-          category="Social Links"
-          socialLinks={project.socialLinks?.map((link: any) => ({
-            name: link.name ?? "Rede Social",
-            url: link.url,
-          }))}
-        />
-      </section>
+  {/* Redes Sociais */}
+  <Card_05
+    title={project.user.name ?? "Nome não disponível"} // Passa o nome da pessoa aqui
+    category="Social Links"
+    socialLinks={project.socialLinks?.map((link: any) => ({
+      name: link.name ?? "Rede Social",
+      url: link.url,
+    }))}
+  />
+</section>
 
       {/* Adicionando espaçamento */}
       <Card06 className="bottom-16" />
