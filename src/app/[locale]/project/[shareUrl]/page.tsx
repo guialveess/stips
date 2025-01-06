@@ -3,11 +3,12 @@ import { BrowserComponent } from "@/components/mock-browser";
 import GridPattern from "@/components/ui/grid-pattern";
 import { BentoGrid } from "@/components/custom/BentoGrid";
 import { Spotlight } from "@/components/Spotlight";
+import { BannerClient } from "@/components/custom/banner-client";
+import { LinkIcon } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import Card_05 from "@/components/Card_05";
 import Card06 from "@/components/custom/Card_06";
-import FlickeringGrid from "@/components/ui/flickering-grid";
 
 export default async function PublicProjectPage({
   params,
@@ -63,10 +64,7 @@ export default async function PublicProjectPage({
       {/* Flickering Grid Background */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-30">
         <div className="absolute h-[600px] w-[600px] overflow-hidden rounded-lg bg-background">
-          <GridPattern
-            className="fixed inset-0 z-0 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)] skew-y-12 sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]"
-           
-          />
+          <GridPattern className="fixed inset-0 z-0 skew-y-12 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]" />
         </div>
       </div>
 
@@ -85,6 +83,24 @@ export default async function PublicProjectPage({
             url: link.url,
           }))}
         />
+      </div>
+
+      {/* Banner Section */}
+      <div className="relative z-10 mt-16 w-full max-w-3xl px-4 sm:px-0">
+        <div className="mt-4">
+          <BannerClient
+            initialShow={true}
+            icon={<svg className="h-4 w-4 text-green-800">...</svg>}
+            title={
+              <>
+                Torne-se <span className="font-semibold">PRO</span> e eleve seu
+                projeto: Pense, Crie, Compartilhe.
+              </>
+            }
+            actionLabel="Quero ser PRO"
+            learnMoreUrl="https://stipss.vercel.app/"
+          />
+        </div>
       </div>
     </div>
   );

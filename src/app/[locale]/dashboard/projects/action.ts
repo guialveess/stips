@@ -222,16 +222,11 @@ export async function deleteProjectById(id: string) {
       where: { id },
     });
 
-    // Revalida o caminho antes de redirecionar
+    // Revalida a página de projetos
     revalidatePath(`/dashboard/projects`);
-    console.log("Revalidation completed. Redirecting...");
-
-    // Redireciona para a página de projetos
-    redirect("/dashboard/projects");
+    console.log("Projeto excluído com sucesso.");
   } catch (error) {
-    console.error("Error deleting project:", error);
-
-    // Re-lança o erro apenas se necessário
+    console.error("Erro ao excluir projeto:", error);
     throw new Error("Failed to delete project.");
   }
 }
