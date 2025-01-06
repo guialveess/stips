@@ -18,16 +18,16 @@ export default function Card_05({
   socialLinks = [],
 }: Card05Props) {
   return (
-    <div className="relative mt-6 mx-auto max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-lg transition-all duration-300 hover:border-zinc-300 dark:border-zinc-800 dark:bg-black/70 dark:hover:border-zinc-700">
+    <div className="relative mt-6 mx-auto max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-lg transition-all duration-300 hover:border-zinc-300 dark:border-zinc-800 dark:bg-black/90 dark:hover:border-zinc-700">
       {/* Header */}
       <div className="mb-8 flex flex-col items-start gap-3">
         <div className="flex items-center gap-4">
           <div className="rounded-full bg-zinc-100 p-3 dark:bg-zinc-800/50">
             <Activity className="h-6 w-6 text-[#FF2D55]" />
           </div>
-          <BadgeAnimatedBorder variant="outline" className="text-xs font-medium">
+          <Badge variant="default" className="text-xs font-medium">
           {category}
-        </BadgeAnimatedBorder>
+        </Badge>
         </div>
        
       </div>
