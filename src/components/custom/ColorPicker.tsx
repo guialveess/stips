@@ -67,7 +67,7 @@ export default function Input_08({
   };
 
   return (
-    <div className="relative z-10 min-h-[200px] w-full max-w-xs space-y-2">
+    <div className="relative z-10 min-h-[200px] w-full max-w-xs space-y-2 ">
       {label && (
         <label
           htmlFor="color-input"

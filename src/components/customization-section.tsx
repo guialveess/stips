@@ -57,7 +57,7 @@ export default function CustomizationSection({
   };
 
   return (
-    <div className="flex">
+    <div className="mt-12 min-h-screen items-center justify-center">
   <Card className="max-w-md w-full rounded-3xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:border-zinc-300 dark:border-zinc-800 dark:bg-black/5 dark:hover:border-zinc-700">
     <div>
       <CardTitle className="mb-2.5">Customizar Projeto</CardTitle>

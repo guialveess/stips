@@ -157,7 +157,7 @@ export default function EditableDetails({
   };
 
   return (
-    <div className="mt-12 min-h-screen items-center justify-center">
+    <div className="space-y-6">
       {/* Card: Basic Info */}
       <div className="relative h-full rounded-3xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:border-zinc-300 dark:border-zinc-800 dark:bg-black/5 dark:hover:border-zinc-700">
         <Form {...form}>
