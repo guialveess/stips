@@ -54,7 +54,7 @@ export default function DeleteCard({ id }: { id: string }) {
 
   return (
     <div className="mt-12 min-h-screen items-center justify-center">
-      <Card className="w-full max-w-2xl p-6">
+      <Card className="relative h-full rounded-3xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:border-zinc-300 dark:border-zinc-800 dark:bg-black/5 dark:hover:border-zinc-700">
         <div>
           <CardTitle className="mb-2.5">Deletar Projeto</CardTitle>
           <CardDescription>
@@ -74,11 +74,10 @@ export default function DeleteCard({ id }: { id: string }) {
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>
-                Você tem certeza absoluta?
-              </AlertDialogTitle>
+              <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
               <p className="text-sm text-muted-foreground">
-                Para confirmar, digite <span className="font-semibold">DELETE</span> no campo abaixo.
+                Para confirmar, digite{" "}
+                <span className="font-semibold">DELETE</span> no campo abaixo.
               </p>
             </AlertDialogHeader>
             <div className="mt-4">
@@ -87,7 +86,7 @@ export default function DeleteCard({ id }: { id: string }) {
                 placeholder="Digite DELETE"
                 value={confirmationText}
                 onChange={(e) => setConfirmationText(e.target.value)}
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-destructive"
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-transparent"
               />
             </div>
             <AlertDialogFooter>

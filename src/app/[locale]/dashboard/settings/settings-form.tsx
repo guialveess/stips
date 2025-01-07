@@ -154,7 +154,7 @@ export default function SettingsForm({ currentUser }: { currentUser: User }) {
             <FormItem>
               <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input placeholder="Seu nome" {...field} />
+                <Input className="bg-muted" placeholder="Seu nome" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

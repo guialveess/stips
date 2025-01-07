@@ -18,7 +18,7 @@ export default function PublicProjectLayout({
             squareSize={4}
             gridGap={6}
             color="#60A5FA"
-            
+            maxOpacity={0.8}
             flickerChance={0.1}
           />
         </div>

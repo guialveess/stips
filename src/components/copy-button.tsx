@@ -22,7 +22,7 @@ export default function CopyButton({ content }: { content: string }) {
   return (
     <Button
       type="button"
-      className="absolute right-0 top-0 h-full"
+      className=""
       size="icon"
       variant="ghost"
       onClick={() => copyToClipboard(content)}
