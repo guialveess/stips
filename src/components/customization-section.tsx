@@ -1,10 +1,11 @@
 "use client";
+
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { updateCustomization } from "@/app/[locale]/dashboard/projects/action";
+import { HexPicker } from "@/components/custom/HexPicker";
 
 export default function CustomizationSection({
   projectId,
@@ -24,9 +25,6 @@ export default function CustomizationSection({
       if (background) {
         await updateCustomization(projectId, "background", background);
         toast({ title: "Background atualizado com sucesso!" });
-      } else {
-        await updateCustomization(projectId, "background", "");
-        toast({ title: "Background removido com sucesso!" });
       }
     } catch (error) {
       console.error(error);
@@ -40,16 +38,16 @@ export default function CustomizationSection({
     }
   };
 
-  const removeBackground = async () => {
+  const resetBackground = async () => {
     setPending(true);
     try {
-      await updateCustomization(projectId, "background", "");
-      setBackground(""); // Atualiza o estado local
-      toast({ title: "Background removido com sucesso!" });
+      await updateCustomization(projectId, "background", ""); // Remove o valor no backend
+      setBackground(""); // Reseta o estado local para vazio
+      toast({ title: "Background resetado para o padrão com sucesso!" });
     } catch (error) {
       console.error(error);
       toast({
-        title: "Erro ao remover background.",
+        title: "Erro ao resetar background.",
         description: "Tente novamente mais tarde.",
         variant: "destructive",
       });
@@ -65,76 +63,22 @@ export default function CustomizationSection({
           <CardTitle className="mb-2.5">Customizar Projeto</CardTitle>
           <CardDescription>
             Aqui você pode personalizar a aparência do seu projeto, como o
-            background. Salve ou remova o background para restaurar o padrão.
+            background.
           </CardDescription>
         </div>
 
         <div className="mt-4 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              URL do Background
-            </label>
-            <Input
-              placeholder="Insira a URL do Background"
-              value={background}
-              onChange={(e) => setBackground(e.target.value)}
-              disabled={pending}
-            />
-          </div>
+          <HexPicker value={background} onChange={setBackground} />
           <div className="flex items-center space-x-4">
             <Button onClick={saveBackground} disabled={pending || !background}>
-              {pending && (
-                <svg
-                  className="mr-2 h-5 w-5 animate-spin text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 11-8 8z"
-                  ></path>
-                </svg>
-              )}
               Salvar
             </Button>
             <Button
               variant="secondary"
-              onClick={removeBackground}
+              onClick={resetBackground}
               disabled={pending || !background}
             >
-              {pending && (
-                <svg
-                  className="mr-2 h-5 w-5 animate-spin text-gray-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 11-8 8z"
-                  ></path>
-                </svg>
-              )}
-              Remover
+              Resetar para padrão
             </Button>
           </div>
         </div>

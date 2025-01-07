@@ -11,17 +11,15 @@ export default function PublicProjectLayout({
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Fundo com FlickeringGrid */}
-      <div className="absolute inset-0 -z-10 flex items-center justify-center">
-        <div className="w-full h-full flex items-center justify-center">
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-30">
+        <div className="absolute inset-0 overflow-hidden">
           <FlickeringGrid
-            className="absolute inset-0"
+            className="fixed inset-0 skew-y-12 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]"
             squareSize={4}
             gridGap={6}
             color="#60A5FA"
-            maxOpacity={0.5}
+            
             flickerChance={0.1}
-            height={1200} // Aumentar para cobrir todo o fundo
-            width={1200}
           />
         </div>
       </div>
