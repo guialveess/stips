@@ -123,7 +123,7 @@ export default function Input_08({
         {showOpacity && (
           <div className="mt-4 space-y-1.5">
             <div className="flex justify-between text-xs">
-              <span>Opacity</span>
+              <span>Opacidade</span>
               <span>{opacity}%</span>
             </div>
             <input
@@ -144,7 +144,7 @@ export default function Input_08({
         {/* Color Swatches */}
         <div className="mt-4 space-y-1.5">
           <div className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
-            Swatches
+            Cores pré-definidas
           </div>
           <div className="grid grid-cols-6 gap-1">
             {swatches.map((swatch) => (
