@@ -17,8 +17,8 @@ export default function PublicProjectLayout({
             className="fixed inset-0 skew-y-12 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(450px_circle_at_center,white,transparent)] md:[mask-image:radial-gradient(550px_circle_at_center,white,transparent)]"
             squareSize={4}
             gridGap={6}
-            color="#60A5FA"
-            maxOpacity={0.8}
+            color="#FFFAEC"
+            maxOpacity={0.9}
             flickerChance={0.1}
           />
         </div>

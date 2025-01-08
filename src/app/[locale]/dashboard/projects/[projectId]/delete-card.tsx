@@ -72,7 +72,7 @@ export default function DeleteCard({ id }: { id: string }) {
               Deletar
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent>
+          <AlertDialogContent className="max-w-md w-full rounded-lg px-8 " >
             <AlertDialogHeader>
               <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
               <p className="text-sm text-muted-foreground">
