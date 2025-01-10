@@ -68,7 +68,7 @@ export default function PricingPlans({
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4">
+    <div className="mx-auto w-full max-w-5xl px-4 py-12">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {tiers.map((tier) => (
           <div
