@@ -25,7 +25,7 @@ export default function Card_05({
           <div className="rounded-full bg-zinc-100 p-3 dark:bg-zinc-800/50">
             <Activity className="h-6 w-6 text-[#FF2D55]" />
           </div>
-          <Badge variant="default" className="text-xs font-medium">
+          <Badge variant="default" className="text-sm font-bold">
           {category}
         </Badge>
         </div>

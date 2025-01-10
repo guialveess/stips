@@ -53,7 +53,7 @@ export default async function PublicProjectPage({
       <div className="relative flex flex-col items-center">
         {/* Main Content */}
         <div className="relative z-10 mt-20 flex w-full max-w-3xl flex-col items-center gap-8 p-4">
-          <Badge className="text-sm font-medium text-white dark:text-black">
+          <Badge className="text-sm font-bold text-white dark:text-black">
             <span>🎉</span>
             {project.user.name}
           </Badge>
