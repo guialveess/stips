@@ -19,7 +19,7 @@ export default function ConditionalUser({ user, isPro }: ConditionalUserProps) {
   return (
     <User
       name={user.name || "Usuário"}
-      subline={isPro ? "Plano PRO" : "Plano Free"}
+      subline={isPro ? "Plano PRO" : "Free"}
       avatarProps={{
         src: user.picture || "/default-avatar.png",
         alt: user.name || "Usuário",

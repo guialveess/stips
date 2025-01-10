@@ -2,16 +2,27 @@
 
 import { useEffect } from "react";
 
-export function Background({ background }: { background: string | undefined }) {
+export function Background({ background }: { background?: string }) {
   useEffect(() => {
     // Define o estilo de fundo no body
-    document.body.style.backgroundColor = background || "transparent";
-    document.body.style.backgroundImage = background?.startsWith("http")
-      ? `url(${background})`
-      : "none";
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center";
-    document.body.style.backgroundRepeat = "no-repeat";
+    if (background) {
+      if (background.startsWith("linear-gradient") || background.startsWith("radial-gradient")) {
+        // Caso seja um gradiente
+        document.body.style.backgroundImage = background;
+        document.body.style.backgroundColor = "transparent";
+      } else if (background.startsWith("http")) {
+        // Caso seja uma URL de imagem
+        document.body.style.backgroundImage = `url(${background})`;
+        document.body.style.backgroundColor = "transparent";
+      } else {
+        // Caso seja uma cor sólida
+        document.body.style.backgroundColor = background;
+        document.body.style.backgroundImage = "none";
+      }
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundPosition = "center";
+      document.body.style.backgroundRepeat = "no-repeat";
+    }
 
     return () => {
       // Limpa os estilos ao desmontar o componente
